@@ -26,7 +26,7 @@ public class RemoveA {
         }
 
         return ch + skip(str.substring(1));
-    }
+    } 
 
     public static void main(String[] args) {
         String str =  "bacccd";
