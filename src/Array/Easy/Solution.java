@@ -2,6 +2,7 @@ package Array.Easy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Solution {
@@ -80,7 +81,7 @@ public class Solution {
     public static void moveZeroes(int[] nums) {
         int i = 0;
 
-        for (int j =  0; j< nums.length; j++)  {
+        for (int j = 0; j < nums.length; j++) {
             if (nums[j] != 0) {
                 int temp = nums[i];
                 nums[i++] = nums[j];
@@ -88,6 +89,8 @@ public class Solution {
             }
         }
     }
+
+    // ! day 4:
 
     public static ArrayList<Integer> findUnion(int[] a, int[] b) {
         HashSet<Integer> hash = new HashSet<>();  //O(n)
@@ -127,11 +130,52 @@ public class Solution {
         return sum != 0 ? i : nums.length;
     }
 
+    // ! Geek:
+
+    // ? Brute force
+    public static int longestSubarray(int[] arr, int k) {
+        // code here
+        /**  int maxLength = 0;
+
+         for (int i = 0; i < arr.length; i++) {
+         int sum = 0;
+         for (int j = i; j  < arr.length; j++) {
+         sum += arr[j];
+         if (sum == k) {
+         maxLength = Math.max(maxLength,  j - i +1);
+         }
+         }
+         }
+
+         return maxLength; */
+
+        HashMap<Integer, Integer> bucket = new HashMap<>();
+        int sum = 0;
+        int len = 0;
+        for (int i = 0; i < arr.length; i++) {
+           sum += arr[i];
+
+           if (sum == k) {
+               len = i +1;
+           } else if (bucket.containsKey(sum - k)) {
+               len = Math.max(len, i - bucket.get(sum-k));
+           }
+
+           if (!bucket.containsKey(sum -k )) {
+               bucket.put(sum, i);
+           }
+        }
+
+        return len;
+    }
+
     public static void main(String[] args) {
         //  !      int  [] arr = {0,0,1,1,1,2,2,3,3,4}; remove duplicates test case
 
         //  !  int[] arr = {99,-1,-100,3};  Rotate Array by k step problem. test case
-          int[] arr = {0,1,3};
-          missingNumber(arr);
+        // !  int[] arr = {-5, 8, -14, 2, 4, 12};
+
+        int[] arr = {10, 5, 2, 7, 1, -10};
+        System.out.println(longestSubarray(arr, 15));
     }
 }
