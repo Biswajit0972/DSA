@@ -3,9 +3,9 @@ package BinarySearch;
 public class Solutions {
 
     public static void main(String[] args) {
-        int [] nums = {5,7,7,8,8,10};
-        System.out.println(getStartingPoint(nums, 11));
-        System.out.println(getEndingPoint(nums, 11));
+        int [] nums = {1, 1, 2, 2, 2, 2, 3};
+        System.out.println(getStartingPoint(nums, 2));
+        System.out.println(getEndingPoint(nums, 2));
     }
 
     public static int getStartingPoint(int[] nums, int target) {
