@@ -1,11 +1,15 @@
 package BinarySearch;
 
+import java.util.Arrays;
+
 public class Solutions {
 
     public static void main(String[] args) {
-        int [] nums = {1, 1, 2, 2, 2, 2, 3};
-        System.out.println(nthRoot(3,9));
+        int [] nums = {3,6,7,11};
 
+        for (int num : nums) {
+            System.out.println( (int) Math.ceil((double) num / 3));
+        }
     }
 
     public static int getStartingPoint(int[] nums, int target) {
@@ -86,4 +90,7 @@ public class Solutions {
 
         //? TC O(logn)
     }
+
+    // ! 5 th aug i am only did dsa on leet code.
+    
 }
