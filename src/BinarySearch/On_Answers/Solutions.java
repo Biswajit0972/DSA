@@ -6,10 +6,12 @@ public class Solutions {
     * Binary search on Answer is an algorithm, where we're finding answer based on particular conditions. Basically, Questions gives search space in which we take mid and searching best answer.
     * */
     public static void main(String[] args) {
-       int [] nums = {1,10,3,10,2};
-       int m = 3;
-       int k = 1;
-        System.out.println(minDays(nums, m, k));
+       int [] nums = {21212,10101,12121};
+//       int m = 3;
+//       int k = 1;
+//        System.out.println(minDays(nums, m, k));
+
+        System.out.println(smallestDivisor(nums, 1000000));
     }
     /*
     * 1482. Minimum Number of Days to Make m Bouquets
@@ -82,4 +84,50 @@ public class Solutions {
 
         return res;
     }
+
+    private static int thresholdHelper (int [] nums, int divisior) {
+        int res = 0;
+        for (int num : nums) {
+            res += (int) Math.ceil((double) num / divisior);
+        }
+        return res;
+    }
+
+    /*
+    * 1283. Find the Smallest Divisor Given a Threshold
+    * */
+    public static int smallestDivisor(int[] nums, int threshold) {
+        int  low = 1;
+        int high = Integer.MIN_VALUE;
+        int ans = -1;
+
+        for (int num : nums) {
+
+            high = Math.max(high, num);
+        }
+// ! Approach 1: start with Low  and end with high,  generate all the possible divisors and check if threshold is satisfied.
+
+//        for (int i = low; i <= high; i++) {
+//            if (thresholdHelper(nums, i) <= threshold) {
+//                return i;
+//            }
+//        }
+        // ? TC = O(n) + O(high * n) = O(high * n )
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (thresholdHelper(nums, mid) <= threshold) {
+                ans = mid;
+                high = mid - 1;
+            }else {
+                low = mid + 1;
+            }
+        }
+
+        // ? TC = O(n) + O(log(high - low ) * n) = O(log(high) * n )
+
+        return ans;
+    }
+
+
 }
