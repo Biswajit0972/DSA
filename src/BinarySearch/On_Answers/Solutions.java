@@ -6,12 +6,14 @@ public class Solutions {
     * Binary search on Answer is an algorithm, where we're finding answer based on particular conditions. Basically, Questions gives search space in which we take mid and searching best answer.
     * */
     public static void main(String[] args) {
-       int [] nums = {21212,10101,12121};
+//       int [] nums = {21212,10101,12121};/
 //       int m = 3;
 //       int k = 1;
 //        System.out.println(minDays(nums, m, k));
+//        System.out.println(smallestDivisor(nums, 1000000));
+        int [] weights = {1,2,3,4,5,6,7,8,9,10};
+        int maxDays = 5;
 
-        System.out.println(smallestDivisor(nums, 1000000));
     }
     /*
     * 1482. Minimum Number of Days to Make m Bouquets
@@ -93,6 +95,22 @@ public class Solutions {
         return res;
     }
 
+    private static boolean isItPossibleOnThisCapacity (int [] weights, int maxCapacity, int maxDays) {
+        int dayCount = 1;
+        int tempWeight = maxCapacity;
+
+        for (int weight : weights) {
+           if (weight <= tempWeight) {
+               tempWeight -= weight;
+           }else {
+               dayCount++;
+               tempWeight = maxCapacity - weight;
+           }
+        }
+
+        return dayCount <= maxDays;
+    }
+
     /*
     * 1283. Find the Smallest Divisor Given a Threshold
     * */
@@ -129,5 +147,34 @@ public class Solutions {
         return ans;
     }
 
+    /*
+    * 1011. Capacity To Ship Packages Within D Days
+    * */
+    public static int shipWithinDays(int[] weights, int days) {
+       int maxWeight = 0;
+       int minWeight = 0;
 
+       for (int weight : weights) {
+           minWeight = Math.max(minWeight, weight);
+           maxWeight += weight;
+       }
+
+//       for (int i = 1; i <= maxWeight; i++) {
+//           if (isItPossibleOnThisCapacity(weights, i, days)) {
+//               return i;
+//           }
+//       }
+        while (minWeight <= maxWeight) {
+            int mid = minWeight + (maxWeight - minWeight) / 2;
+
+            if (isItPossibleOnThisCapacity(weights, mid, days)) {
+                maxWeight = mid - 1;
+            } else {
+                minWeight = mid + 1;
+            }
+        }
+
+        return minWeight;
+
+    }
 }
