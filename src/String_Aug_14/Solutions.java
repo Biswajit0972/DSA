@@ -1,5 +1,7 @@
 package String_Aug_14;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Stack;
 
 
@@ -78,6 +80,66 @@ public class Solutions {
         return "";
     }
 
+    public static boolean isIsomorphic(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
 
+        HashMap<Character, Character> map = new HashMap<>();
 
+        for (int i = 0; i < s.length(); i++) {
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
+
+            if (map.containsKey(sc)) {
+                if (map.get(sc) != tc) {
+                    return false;
+                }
+            }
+
+            map.put(sc, tc);
+        }
+
+        return true;
+    }
+
+    public static boolean rotateString(String s, String goal) {
+        StringBuilder sb = new StringBuilder(s);
+
+        int n = s.length();
+        int count = 0;
+
+        while (count < n) {
+            char ch = sb.charAt(0);
+            sb.deleteCharAt(0);
+            sb.append(ch);
+
+            if (sb.toString().equals(goal)) {
+                return true;
+            }
+            count++;
+        }
+
+return false;
+    }
+
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        HashSet<Character> set = new HashSet<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            set.add(s.charAt(i));
+        }
+
+        for (int i = 0; i < t.length(); i++) {
+            if (!set.contains(t.charAt(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
