@@ -1,14 +1,22 @@
 package String_Aug_14;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Stack;
+import java.util.*;
 
 
 public class Solutions {
+
+    static class Tracker {
+        int count;
+        char ch;
+        public Tracker(int count, char ch) {
+            this.count = count;
+            this.ch = ch;
+        }
+    }
+
     public static void main(String[] args) {
-        String originalString ="  hello world  ";
-        System.out.println(largestOddNumber("4206"));
+       String s = "2a554442f544asfasssffffasss";
+        System.out.println(frequencySort(s));
     }
 
     /**
@@ -28,6 +36,7 @@ public class Solutions {
      * Time Complexity: O(n) — single pass over the string.
      * Space Complexity: O(n) — for the output builder (excluding input).
      */
+
     public static String removeOuterParentheses(String s) {
        StringBuilder sb = new StringBuilder();
        int depth = 0;
@@ -120,7 +129,7 @@ public class Solutions {
             count++;
         }
 
-return false;
+        return false;
     }
 
     public boolean isAnagram(String s, String t) {
@@ -141,5 +150,32 @@ return false;
         }
 
         return true;
+    }
+
+    public static String frequencySort(String s) {
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+           map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+
+        ArrayList<HashMap.Entry<Character, Integer>> list = new ArrayList<>(map.entrySet());
+
+        Collections.sort(list, (a, b) -> b.getValue() - a.getValue());
+
+        StringBuilder sb = new StringBuilder();
+
+        for (HashMap.Entry<Character, Integer> entry : list) {
+            for (int i = 0; i < entry.getValue(); i++) {
+                sb.append(entry.getKey());
+            }
+        }
+
+        return sb.toString();
     }
 }
