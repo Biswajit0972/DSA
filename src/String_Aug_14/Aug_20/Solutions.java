@@ -36,7 +36,7 @@ public class Solutions {
               if (romanValue(curr) >= romanValue(prev)) {
                   sum += romanValue(curr);
               }else {
-                  sum -= romanValue(prev);
+                  sum -= romanValue(curr);
               }
               prev = curr;
         }
