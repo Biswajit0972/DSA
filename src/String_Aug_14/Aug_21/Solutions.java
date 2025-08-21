@@ -2,7 +2,7 @@ package String_Aug_14.Aug_21;
 
 public class Solutions {
     public static void main(String[] args) {
-        System.out.println(myAtoi("   -042"));
+        System.out.println(countSubstring("abcabc"));
     }
     public static int myAtoi(String s) {
         s = s.trim();   // only trim leading/trailing spaces
@@ -47,4 +47,33 @@ public class Solutions {
     public static boolean isInteger(char s) {
         return s >= '0' && s <= '9';
     }
+
+    public static int countSubstring(String s) {
+        int n = s.length();
+        int res = 0;
+
+        int [] store = new int[3];
+        int left = 0;
+
+        for (int right = 0; right < n; right++) {
+            store[s.charAt(right) - 'a']++;
+
+            while (store[0] > 0 && store[1] > 0 && store[2] > 0) {
+                res += n - right;
+                store[s.charAt(left) - 'a']--;
+                left++;
+            }
+
+        }
+        return res;
+    }
+
+    // ? TC: O(n)
+    // ? SC: O(1) This approach is optimal, gives a mathematical test. when our string is valid means calculate res by removes valid extra elements
+
+    public static boolean isAbcContains(String s) {
+        return s.contains("a") && s.contains("b") && s.contains("c");
+    }
+
+
 }
