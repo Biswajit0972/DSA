@@ -2,7 +2,7 @@ package String_Aug_14.Aug_21;
 
 public class Solutions {
     public static void main(String[] args) {
-        System.out.println(countSubstring("abcabc"));
+        System.out.println(longestPalindrome("babad"));
     }
     public static int myAtoi(String s) {
         s = s.trim();   // only trim leading/trailing spaces
@@ -75,5 +75,46 @@ public class Solutions {
         return s.contains("a") && s.contains("b") && s.contains("c");
     }
 
+    public static String longestPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
 
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left  <= right) {
+            if (isPalindrome(s.substring(left, right + 1))) {
+                return s.substring(left, right + 1);
+            }
+
+            if (s.charAt(left) == s.charAt(right)) {
+                left++;
+                right--;
+            }else if (s.charAt(left) != s.charAt(right)) {
+                if (s.charAt(left) == s.charAt(right - 1)) {
+                    right--;
+                }else {
+                    if (s.charAt(left + 1) == s.charAt(right)) {
+                        left++;
+                    }else {
+                        left++;
+                        right--;
+                    }
+                }
+            }
+        }
+
+        return "";
+    }
+
+    public static boolean isPalindrome(String s) {
+        int n = s.length();
+        for (int i = 0; i < n / 2; i++) {
+            if (s.charAt(i) != s.charAt(n - 1 - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
