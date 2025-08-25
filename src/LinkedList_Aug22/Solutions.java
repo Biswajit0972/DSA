@@ -26,4 +26,22 @@ public class Solutions {
 
         return slow;
     }
+
+    public ListNode reverseListUsingIteration(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode ptr1 = null;
+        ListNode temp = head;
+
+        while (temp != null) {
+            ListNode ptr2 = temp.next;
+            temp.next = ptr1;
+            ptr1 = temp;
+            temp =  ptr2;
+        }
+
+        return ptr1;
+    }
 }
