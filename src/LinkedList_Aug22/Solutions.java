@@ -27,21 +27,29 @@ public class Solutions {
         return slow;
     }
 
-    public ListNode reverseListUsingIteration(ListNode head) {
+    public ListNode reverseList (ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
-        ListNode ptr1 = null;
-        ListNode temp = head;
+        // ! head.next.next means null, reason in main list current head still points to next, but it's next node next points to null, internally we just change pointer.
+       ListNode lastNode = reverseList(head.next);
+       head.next.next = head;
+       head.next = null;
+       return lastNode;
+    }
 
-        while (temp != null) {
-            ListNode ptr2 = temp.next;
-            temp.next = ptr1;
-            ptr1 = temp;
-            temp =  ptr2;
+    public ListNode reverseListUsingIteration(ListNode head) {
+
+        if (head == null || head.next == null) {
+            return head;
         }
 
-        return ptr1;
+        ListNode lastNode = reverseList(head.next);
+        lastNode.next = head;
+        head.next = null;
+        return head;
     }
+
 }
+
