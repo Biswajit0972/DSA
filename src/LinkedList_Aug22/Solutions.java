@@ -211,5 +211,22 @@ public class Solutions {
 
         return dummy.next;
     }
+
+    public ListNode deleteMiddle(ListNode head) {
+        if (head == null ||  head.next ==  null) {
+            return null;
+        }
+
+        ListNode temp = head;
+        int halfNode = listSize(head)  / 2;
+
+        for (int i = 0; i < halfNode - 1; i++) {
+            temp = temp.next;
+        }
+
+        temp.next = temp.next.next;
+
+        return head;
+    }
 }
 
