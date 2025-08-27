@@ -1,5 +1,7 @@
 package LinkedList_Aug22;
 
+import java.util.List;
+
 public class Solutions {
     static class ListNode {
         int val;
@@ -45,10 +47,17 @@ public class Solutions {
             return head;
         }
 
-        ListNode lastNode = reverseList(head.next);
-        lastNode.next = head;
-        head.next = null;
-        return head;
+        ListNode temp = head;
+        ListNode dummy = null;
+
+        while (temp != null) {
+            ListNode currNext = temp.next;
+            temp.next = dummy;
+            dummy = temp;
+            temp = currNext;
+        }
+
+        return dummy;
     }
     public ListNode detectCycle(ListNode head) {
         if (head == null || head.next == null) {
@@ -135,6 +144,47 @@ public class Solutions {
         odd.next = evenHead;
 
         return odd;
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null) {
+            return null;
+        }
+
+        int listSize = listSize(head);
+
+        if (n == listSize) {
+            return head.next;
+        }
+
+        ListNode temp = head;
+        // ! listSize - n-1 means we are skipping n nodes from head.
+        // ? previously we skipped listsize - n, here one cache: 0 to less 3 node i = 0 temp move to the second node, i = 1 move to the third node,to delete 4
+        //  node  we need to stop here, but we still goes 4th node. listSize - n means 1-based indexing, but here we are fllowing 0 based indexing
+        for (int i = 0; i < listSize - n-1; i++) {
+            temp = temp.next;
+        }
+
+        temp.next = temp.next == null? null : temp.next.next;
+
+        return head;
+    }
+
+    public int listSize(ListNode head) {
+        if (head == null) {
+            return 0;
+        }
+
+        int count = 0;
+
+        ListNode temp = head;
+
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+
+        return count;
     }
 
 
