@@ -1,6 +1,5 @@
 package LinkedList_Aug22;
 
-import java.util.List;
 
 public class Solutions {
     static class ListNode {
@@ -382,6 +381,53 @@ public class Solutions {
         p2.next = two.next;
         p3.next = null;
         return zero.next;
+    }
+
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode mid = middleNode(head);
+        ListNode  right = mid.next;
+        mid.next = null;
+        ListNode left = sortList(head);
+        right = sortList(right);
+        return mergeList( left,  right) ;
+    }
+
+    public ListNode mergeList(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+
+        ListNode dummy = new ListNode(-1);
+
+        ListNode p3 = dummy;
+
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                p3.next = l1;
+                p3 = p3.next;
+                l1 = l1.next;
+            }else {
+                p3.next = l2;
+                p3 = p3.next;
+                l2 = l2.next;
+            }
+        }
+
+        if (l1 != null) {
+            p3.next = l1;
+        }
+        if (l2 != null) {
+            p3.next = l2;
+        }
+
+        return dummy.next;
     }
 }
 
