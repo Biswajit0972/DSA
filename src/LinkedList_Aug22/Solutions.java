@@ -251,5 +251,63 @@ public class Solutions {
 
         return head;
     }
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int sizeA = listSize(headA);
+        int sizeB = listSize(headB);
+
+        ListNode slow;
+        ListNode fast;
+
+        if (sizeA > sizeB) {
+            fast = headA;
+            slow = headB;
+        }else {
+            fast = headB;
+            slow = headA;
+        }
+
+        for (int i = 0; i < Math.abs(sizeA-sizeB); i++) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            if (fast == slow) {
+                return fast;
+            }
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        return null;
+    }
+
+    public ListNode addOne(ListNode head) {
+      if (head == null) {
+          return null;
+      }
+
+      ListNode revList  = reverseListUsingIteration(head);
+      boolean carry = true;
+
+      ListNode temp = revList;
+
+      while (temp != null) {
+          int sum = temp.val + (carry? 1 : 0);
+          carry = sum >= 10;
+          temp.val = sum % 10;
+          temp = temp.next;
+      }
+
+      ListNode  resultList = reverseListUsingIteration(revList);
+
+      if (carry) {
+          ListNode newHead = new ListNode(1);
+          newHead.next = resultList;
+          return newHead;
+      }
+
+      return resultList;
+    }
 }
 
