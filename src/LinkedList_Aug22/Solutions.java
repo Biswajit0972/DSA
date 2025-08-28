@@ -10,7 +10,7 @@ public class Solutions {
         next = null;}
     }
     public static void main(String[] args) {
-
+        System.out.println( 1 == 0 || 1==0);
     }
 
     public ListNode middleNode(ListNode head) {
@@ -308,6 +308,43 @@ public class Solutions {
       }
 
       return resultList;
+    }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if (l1 == null && l2 == null) {
+            return null;
+        }
+
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode p1 = l1;
+        ListNode  p2 = l2;
+        ListNode  p3 = dummy;
+
+        int carray = 0;
+
+        while (p1 != null || p2 != null) {
+            int sum = carray + (p1 == null? 0 : p1.val) + (p2 == null? 0 : p2.val);
+            carray = sum >= 10? 1 : 0;
+            sum = sum % 10;
+            p3.next = new ListNode(sum);
+            p3 = p3.next;
+
+            p1 = p1 == null? null  : p1.next;
+            p2 = p2 == null ? null : p2.next;
+        }
+
+        if (carray != 0) {
+            p3.next = new ListNode(carray);
+        }
+
+        return dummy.next;
     }
 }
 
