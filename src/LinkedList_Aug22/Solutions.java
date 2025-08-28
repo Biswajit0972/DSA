@@ -346,5 +346,42 @@ public class Solutions {
 
         return dummy.next;
     }
+
+    public ListNode segregate(ListNode head) {
+        // code here
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode zero = new ListNode(-1);
+        ListNode one = new ListNode(-1);
+        ListNode two = new ListNode(-1);
+
+        ListNode p1 = zero;
+        ListNode p2 = one;
+        ListNode p3 = two;
+
+        ListNode temp = head;
+
+        while (temp != null) {
+            if (temp.val == 0) {
+                p1.next = temp;
+                p1 = p1.next;
+            }else if (temp.val == 1) {
+                p2.next = temp;
+                p2 = p2.next;
+            }else {
+                p3.next = temp;
+                p3 = p3.next;
+            }
+
+            temp = temp.next;
+        }
+
+        p1.next = (one.next == null? two.next : one.next);
+        p2.next = two.next;
+        p3.next = null;
+        return zero.next;
+    }
 }
 
