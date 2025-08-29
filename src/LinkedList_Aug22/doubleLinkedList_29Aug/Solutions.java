@@ -87,4 +87,38 @@ public class Solutions {
 
         return res;
     }
+
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSumOptimal(int target, Node head) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if (head == null) return res;
+
+        Node left = head;
+        Node right = head;
+
+        // move right pointer to the tail
+        while (right.next != null) {
+            right = right.next;
+        }
+
+        // two-pointer traversal
+        while (left != null && right != null && left != right && left.prev != right) {
+            int sum = left.val + right.val;
+
+            if (sum == target) {
+                ArrayList<Integer> pair = new ArrayList<>();
+                pair.add(left.val);
+                pair.add(right.val);
+                res.add(pair);
+
+                left = left.next;
+                right = right.prev;
+            } else if (sum < target) {
+                left = left.next;
+            } else {
+                right = right.prev;
+            }
+        }
+
+        return res;
+    }
 }
