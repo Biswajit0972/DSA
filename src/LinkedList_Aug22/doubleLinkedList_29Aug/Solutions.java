@@ -49,6 +49,14 @@ public class Solutions {
         return head;
     }
 
+    /*
+    * I can solve this problem using extra space by constructing a new Double Linked List.
+    * Use Linear search and skip all the nodes which have the value x.
+    * Create a fake node and Iterate an entire list.
+    * If the current node has the value x, then skip it.
+    * Add the current node to the new list.
+    * update the fake pointer.
+    *  */
     //!  TC: O(n)
     // ? SC: O(1)
 }
