@@ -1,5 +1,8 @@
 package LinkedList_Aug22.doubleLinkedList_29Aug;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Solutions {
     static class Node {
         int val;
@@ -60,5 +63,28 @@ public class Solutions {
         // ? SC: O(1)
     }
 
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target,Node head) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if (head == null) {
+            return res;
+        }
 
+        Node temp = head;
+        HashSet<Integer> set = new HashSet<>();
+
+        while (temp  != null) {
+            int diff = target - temp.val;
+
+            if (set.contains(diff)) {
+                ArrayList<Integer> pair = new ArrayList<>();
+                pair.add(diff);
+                pair.add(temp.val);
+                res.add(pair);
+            }
+            set.add(temp.val);
+            temp = temp.next;
+        }
+
+        return res;
+    }
 }
