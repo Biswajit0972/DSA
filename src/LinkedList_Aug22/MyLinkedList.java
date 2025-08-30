@@ -10,6 +10,7 @@ public class MyLinkedList {
             this.next = null;
         }
     }
+
     Node head = null;
     Node tail = null;
     int current_size = 0;

@@ -429,5 +429,74 @@ public class Solutions {
 
         return dummy.next;
     }
+
+    public ListNode rotateRight(ListNode head, int k) {
+            if (head == null || head.next == null) {
+                return head;
+            }
+
+            int listSize = listSize(head);
+            if (listSize == 0 || k == 0) {
+                return head;
+            }
+            k = k % listSize;
+
+            while (k  >  0) {
+                ListNode lastNode = rotateRightHelper(head);
+                lastNode.next = head;
+                head = lastNode;
+                k--;
+            }
+
+            return head;
+    }
+
+    public ListNode rotateRightHelper (ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode temp = head;
+
+        while (temp.next != null && temp.next.next != null) {
+            temp = temp.next.next;
+        }
+
+        ListNode lastNode = temp.next;
+        temp.next = null;
+        return lastNode;
+
+    }
+
+    public ListNode rotateRight2 (ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        int listSize = listSize(head);
+        if (listSize == 0 || k == 0) {
+            return head;
+        }
+
+        k = k % listSize;
+
+        ListNode temp = head;
+        while (temp.next  != null) {
+            temp = temp.next;
+        }
+
+        temp.next = head;
+        temp = head;
+
+        for (int i = 0; i < listSize - k - 1; i++) {
+            temp = temp.next;
+        }
+
+        ListNode lastNode = temp.next;
+        temp.next = null;
+
+        return lastNode;
+    }
+
 }
 
