@@ -121,4 +121,50 @@ public class Solutions {
 
         return res;
     }
+
+    Node removeDuplicates(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node temp = head;
+        Node FirstVisit = head;
+
+        while (temp != null) {
+
+            if (temp.val != FirstVisit.val) {
+                FirstVisit.next = temp;
+                temp.prev = FirstVisit;
+                FirstVisit = temp;
+            }
+
+            temp = temp.next;
+        }
+
+        FirstVisit.next  =  null;
+
+            // ! This code passed 4022 test cases. fix it with a basic approach
+        return head;
+    }
+
+    Node removeDuplicates2(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node temp = head.next;
+
+        while (temp != null) {
+            Node nextNode = temp.next;
+
+            if (temp.prev.val  == temp.val) {
+                temp.prev.next = temp.next;
+                temp.next.prev = temp.prev;
+           }
+
+            temp = nextNode;
+        }
+        // ! This code passed 4002 test cases. fix it with a basic approach
+        return head;
+    }
 }
