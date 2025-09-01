@@ -142,7 +142,7 @@ public class Solutions {
         }
 
         FirstVisit.next  =  null;
-
+        
             // ! This code passed 4022 test cases. fix it with a basic approach
         return head;
     }
