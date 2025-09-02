@@ -102,7 +102,7 @@ public class Solutions {
         }
 
         if (s.charAt(0) == '-') {
-            return (int) myAtoiHelper(0, s.substring(1), true);
+            return (int) -myAtoiHelper(0, s.substring(1), true);
         }else if (s.charAt(0) == '+') {
             return (int) myAtoiHelper(0, s.substring(1), false);
         }else {
@@ -117,11 +117,11 @@ public class Solutions {
 
         res = res * 10 + s.charAt(0) - '0';
 
-        if (isNegative && res < Integer.MIN_VALUE) {
+        if (isNegative && -res < Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;
         }
 
-        if (!isNegative && res < Integer.MAX_VALUE) {
+        if (!isNegative && res > Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
         }
 
