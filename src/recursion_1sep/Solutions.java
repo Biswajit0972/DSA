@@ -64,4 +64,30 @@ public class Solutions {
         sort(s, k);
         s.push(top);
     }
+
+    public  void reverse(Stack<Integer> St) {
+        // code here
+        if (St.isEmpty()) {
+            return;
+        }
+
+        int top = St.pop();
+        reverse(St);
+        reverse(St, top);
+    }
+
+    public void reverse (Stack<Integer> s,  int k) {
+        Stack<Integer> temp = new Stack<>();
+        if (s.isEmpty() ) {
+            return;
+        }
+
+        while (!s.isEmpty()) {
+            temp.push(s.pop());
+        }
+        s.push(k);
+        while (!temp.isEmpty()) {
+            s.push(temp.pop());
+        }
+    }
 }
