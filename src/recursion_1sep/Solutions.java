@@ -1,5 +1,7 @@
 package recursion_1sep;
 
+import java.util.Stack;
+
 public class Solutions {
     public static void main(String[] args) {
 
@@ -39,5 +41,27 @@ public class Solutions {
             res = (res * base) % M;
         }
         return res;
+    }
+
+    public Stack<Integer> sort(Stack<Integer> s) {
+       if (s.isEmpty()) return s;
+
+       int top = s.pop();
+       sort(s);
+       sort(s, top);
+       return s;
+    }
+
+    public void sort(Stack<Integer> s, int k) {
+        // base case
+
+        if (s.isEmpty() || s.peek() < k) {
+            s.push(k);
+            return;
+        };
+
+        int top = s.pop();
+        sort(s, k);
+        s.push(top);
     }
 }
