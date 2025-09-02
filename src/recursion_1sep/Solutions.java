@@ -90,4 +90,45 @@ public class Solutions {
             s.push(temp.pop());
         }
     }
+    public static int myAtoi(String s) {
+        if (s.isEmpty()) {
+            return 0;
+        }
+
+        s = s.trim();
+
+        if (s.isEmpty()) {
+            return  0;
+        }
+
+        if (s.charAt(0) == '-') {
+            return (int) myAtoiHelper(0, s.substring(1), true);
+        }else if (s.charAt(0) == '+') {
+            return (int) myAtoiHelper(0, s.substring(1), false);
+        }else {
+            return (int) myAtoiHelper(0, s, false);
+        }
+    }
+
+    public static long myAtoiHelper(long res, String s, boolean isNegative) {
+        if (s.isEmpty() || !isInteger(s.charAt(0))) {
+            return res;
+        }
+
+        res = res * 10 + s.charAt(0) - '0';
+
+        if (isNegative && res < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+
+        if (!isNegative && res < Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        return myAtoiHelper(res, s.substring(1), isNegative);
+    }
+
+    public static boolean isInteger(char s) {
+        return s >= '0' && s <= '9';
+    }
 }
