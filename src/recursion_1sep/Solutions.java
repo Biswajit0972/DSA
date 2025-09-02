@@ -22,7 +22,7 @@ public class Solutions {
             return binaryExpoentiation(x, y / 2);
         }
     }
-    int M = (int)1e9 + 7;
+    int M = (int) 1e9 + 7;
 
     public int countGoodNumbers(long n) {
         long evenPosition = (n + 1) / 2; // digits at even indices → choices = 5
