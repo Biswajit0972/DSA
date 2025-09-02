@@ -90,6 +90,7 @@ public class Solutions {
             s.push(temp.pop());
         }
     }
+
     public static int myAtoi(String s) {
         if (s.isEmpty()) {
             return 0;
