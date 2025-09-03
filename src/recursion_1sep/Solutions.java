@@ -1,12 +1,17 @@
 package recursion_1sep;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 public class Solutions {
     public static void main(String[] args) {
+        int [] nums = {1,2,3};
 
+        for (List<Integer> l : subsets(nums)) {
+            System.out.println(Arrays.toString(l.toArray()));
+        }
     }
 
     public static int binaryExpoentiation  (int x, int y) {
@@ -183,6 +188,22 @@ public class Solutions {
             sb.append(')');
             generateParenthesis(n, open, close + 1, sb, res);
             sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+    public static List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        subsets(nums, 0, res, new ArrayList<>());
+        return res;
+    }
+
+    public static void subsets(int[] nums, int index, List<List<Integer>> res, List<Integer> curr) {
+        res.add(new ArrayList<>(curr));
+
+        for (int i = index; i < nums.length; i++) {
+            curr.add(nums[i]);
+            subsets(nums, i + 1, res, curr);
+            curr.remove(curr.size() - 1);
         }
     }
 }
