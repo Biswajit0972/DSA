@@ -1,5 +1,7 @@
 package recursion_1sep;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class Solutions {
@@ -131,5 +133,29 @@ public class Solutions {
 
     public static boolean isInteger(char s) {
         return s >= '0' && s <= '9';
+    }
+
+    public static List<String> generateBinaryStrings(int n) {
+        StringBuilder sb = new StringBuilder();
+         List<String> res = new ArrayList<>();
+         generateBinaryStrings(res, sb, n, false);
+         return res;
+    }
+
+    public static void generateBinaryStrings(List<String> res, StringBuilder sb, int n, boolean isPrevOne) {
+        if (sb.length() == n) {
+            res.add(sb.toString());
+            return;
+        }
+
+        sb.append(0);
+        generateBinaryStrings(res,  sb, n, false);
+        sb.deleteCharAt(sb.length() - 1);
+
+        if (!isPrevOne) {
+            sb.append(1);
+            generateBinaryStrings(res,  sb, n, true);
+            sb.deleteCharAt(sb.length() - 1);
+        }
     }
 }
