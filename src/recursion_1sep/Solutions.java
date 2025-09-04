@@ -7,8 +7,8 @@ import java.util.Stack;
 
 public class Solutions {
     public static void main(String[] args) {
-        int [] nums = {10, 1,2,5,7};
-        System.out.println(checkSubsequenceSum(10, nums, 100));
+        int [] nums = {2,3,5};
+        System.out.println(combinationSum(nums, 8));
     }
 
     public static int binaryExpoentiation  (int x, int y) {
@@ -225,5 +225,30 @@ public class Solutions {
         boolean res1 = checkSubsequenceHelper(arr, sum, index + 1, k);
         boolean res2 = checkSubsequenceHelper(arr, sum - arr[index], index + 1, k);
         return res1 || res2;
+    }
+
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        combinationSumHelper(candidates, target, 0, res, new ArrayList<>(), 0);
+        return res;
+    }
+
+    public static void combinationSumHelper(int [] candidates, int target, int index, List<List<Integer>> res, List<Integer> curr, int sum) {
+        if (sum == target) {
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+
+        if (sum > target) {
+            return;
+        }
+
+        if (index == candidates.length) {
+            return;
+        }
+        curr.add(candidates[index]);
+        combinationSumHelper(candidates, target, index, res, curr, sum + candidates[index]);
+        curr.remove(curr.size() - 1);
+        combinationSumHelper(candidates, target, index + 1, res, curr, sum);
     }
 }
