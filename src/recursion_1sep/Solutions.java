@@ -297,4 +297,29 @@ public class Solutions {
         subsetSumsHelper(arr, index + 1, sum + arr[index], curr);
         subsetSumsHelper(arr, index + 1, sum, curr);
     }
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        if (nums.length == 0) {
+            return new ArrayList<>();
+        }
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        subsetsWithDupHelper(nums, 0, res, new ArrayList<>());
+        return res;
+    }
+
+    public void subsetsWithDupHelper(int [] nums, int index, List<List<Integer>> res, List<Integer> curr) {
+        if (index == nums.length) {
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+
+        for (int i = index; i < nums.length; i++) {
+            if (i >  index && nums[i] == nums[i-1]) continue;
+            curr.add(nums[i]);
+            subsetsWithDupHelper(nums, i + 1, res, curr);
+            curr.remove(curr.size() - 1);
+        }
+    }
+
 }
