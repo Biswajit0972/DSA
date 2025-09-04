@@ -276,4 +276,25 @@ public class Solutions {
             curr.remove(curr.size() - 1);
         }
     }
+
+    public ArrayList<Integer> subsetSums(int[] arr) {
+        // code here
+        if (arr.length == 0) {
+            return new ArrayList<>();
+        }
+
+        ArrayList<Integer> res = new ArrayList<>();
+        subsetSumsHelper(arr, 0, 0, res);
+        return res;
+    }
+
+    public void subsetSumsHelper(int [] arr, int index, int sum, ArrayList<Integer> curr) {
+        if (index == arr.length) {
+            curr.add(sum);
+            return;
+        }
+
+        subsetSumsHelper(arr, index + 1, sum + arr[index], curr);
+        subsetSumsHelper(arr, index + 1, sum, curr);
+    }
 }
