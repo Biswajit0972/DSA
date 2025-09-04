@@ -251,4 +251,29 @@ public class Solutions {
         curr.remove(curr.size() - 1);
         combinationSumHelper(candidates, target, index + 1, res, curr, sum);
     }
+
+    public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(candidates); // must sort for duplicate skipping
+        combinationSum2Helper(candidates, target, 0, res, new ArrayList<>(), 0);
+        return res;
+    }
+
+    public static void combinationSum2Helper(int[] candidates, int target, int index,
+                                             List<List<Integer>> res, List<Integer> curr, int sum) {
+        if (sum == target) {
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+
+        for (int i = index; i < candidates.length; i++) {
+            if (sum + candidates[i] > target) break; // pruning
+
+            if (i > index && candidates[i] == candidates[i - 1]) continue; // skip duplicates
+
+            curr.add(candidates[i]);
+            combinationSum2Helper(candidates, target, i + 1, res, curr, sum + candidates[i]);
+            curr.remove(curr.size() - 1);
+        }
+    }
 }
