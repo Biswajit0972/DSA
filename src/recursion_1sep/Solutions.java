@@ -7,11 +7,8 @@ import java.util.Stack;
 
 public class Solutions {
     public static void main(String[] args) {
-        int [] nums = {1,2,3};
-
-        for (List<Integer> l : subsets(nums)) {
-            System.out.println(Arrays.toString(l.toArray()));
-        }
+        int [] nums = {10, 1,2,5,7};
+        System.out.println(checkSubsequenceSum(10, nums, 100));
     }
 
     public static int binaryExpoentiation  (int x, int y) {
@@ -205,5 +202,28 @@ public class Solutions {
             subsets(nums, i + 1, res, curr);
             curr.remove(curr.size() - 1);
         }
+    }
+
+    public static boolean checkSubsequenceSum(int N, int[] arr, int K) {
+        // code here
+       if (arr.length == 0) {
+           return false;
+       }
+
+       return checkSubsequenceHelper(arr, 0, 0, K);
+    }
+    public static boolean  checkSubsequenceHelper (int [] arr, int sum, int index, int  k) {
+        if (index == arr.length || sum > k) {
+            return false;
+        }
+
+        if (sum == k) {
+            return true;
+        }
+
+        sum += arr[index];
+        boolean res1 = checkSubsequenceHelper(arr, sum, index + 1, k);
+        boolean res2 = checkSubsequenceHelper(arr, sum - arr[index], index + 1, k);
+        return res1 || res2;
     }
 }
