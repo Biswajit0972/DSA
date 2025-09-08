@@ -2,7 +2,7 @@ package Bit_Manipulation;
 
 public class BasicSolutions {
     public static void main(String[] args) {
-        System.out.println(setIthBit(9, 2));
+        System.out.println(clearIthBit(8,  3));
     }
 
     public static String intToBinary(int num) {
@@ -63,5 +63,12 @@ public class BasicSolutions {
     public static int setIthBit (int n, int i) {
         //? we have to think that what operator could be used
         return n | (1 << i);
+    }
+
+    public static int clearIthBit (int n, int i) {
+        /*
+        * Turn off the i th bit, set 1 in the i th bit after that, flip all the bits, and perform AND operation with the original number.
+        * */
+        return n & ~(1 << i);
     }
 }
