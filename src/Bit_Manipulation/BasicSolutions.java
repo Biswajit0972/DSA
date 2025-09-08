@@ -71,4 +71,8 @@ public class BasicSolutions {
         * */
         return n & ~(1 << i);
     }
+
+    public static int toggleIthBit (int n, int i) {
+        return n ^ (1 << i);
+    }
 }
