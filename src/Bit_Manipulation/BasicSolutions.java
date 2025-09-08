@@ -2,7 +2,7 @@ package Bit_Manipulation;
 
 public class BasicSolutions {
     public static void main(String[] args) {
-
+checkIthBit(13, 2);
     }
 
     public static String intToBinary(int num) {
@@ -44,4 +44,21 @@ public class BasicSolutions {
         a = a ^ b;
         System.out.println(a + " " + b);
     }
+
+    public static void checkIthBit(int n,  int i) {
+        //? right shift operator >>
+        if (((n >> i) & 1) != 0) {
+            System.out.println("1");
+        }else {
+            System.out.println("0");
+        }
+        //? Left shift operator <<
+        if ((n & (1 << i)) != 0) {
+            System.out.println("1");
+        } else {
+            System.out.println("0");
+        }
+    }
+
+
 }
