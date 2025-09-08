@@ -61,6 +61,7 @@ public class BasicSolutions {
     }
 
     public static int setIthBit (int n, int i) {
+        //? we have to think that what operator could be used
         return n | (1 << i);
     }
 }
