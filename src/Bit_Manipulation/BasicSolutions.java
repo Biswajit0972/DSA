@@ -2,7 +2,6 @@ package Bit_Manipulation;
 
 public class BasicSolutions {
     public static void main(String[] args) {
-        System.out.println(binaryToInt(intToBinary(13)));
 
     }
 
@@ -37,5 +36,12 @@ public class BasicSolutions {
 
         // ? TC  =  O(n)
         // ? SC =  O(1)
+    }
+
+    public static void swapTwoNumber (int a, int b) {
+        a = a ^ b;
+        b = a ^ b;
+        a = a ^ b;
+        System.out.println(a + " " + b);
     }
 }
