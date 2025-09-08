@@ -2,7 +2,7 @@ package Bit_Manipulation;
 
 public class BasicSolutions {
     public static void main(String[] args) {
-checkIthBit(13, 2);
+        System.out.println(setIthBit(9, 2));
     }
 
     public static String intToBinary(int num) {
@@ -60,5 +60,7 @@ checkIthBit(13, 2);
         }
     }
 
-
+    public static int setIthBit (int n, int i) {
+        return n | (1 << i);
+    }
 }
