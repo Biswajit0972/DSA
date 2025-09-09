@@ -75,4 +75,9 @@ public class BasicSolutions {
     public static int toggleIthBit (int n, int i) {
         return n ^ (1 << i);
     }
+
+    public boolean isPowerOfTwo(int n) {
+        return n > 0 && (n & (n - 1)) == 0;
+    }
+
 }
