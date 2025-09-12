@@ -41,8 +41,26 @@ public class Solutions {
 
         return sb.toString();
     }
-    public static String postToInfix(String exp) {
 
+    public static String postToInfix(String exp) {
+        if (exp == null || exp.isEmpty()) {
+            return exp;
+        }
+
+        Stack<String> st = new Stack<>();
+
+        for (int i = 0; i < exp.length(); i++) {
+            char ch = exp.charAt(i);
+            if (isOperand(ch)) {
+                st.push(String.valueOf(ch));
+            }else {
+                String right = st.pop();
+                String left = st.pop();
+                String op = String.valueOf(ch);
+                st.push("("+ left + op + right + ")");
+            }
+        }
+        return st.pop();
     }
 
 
