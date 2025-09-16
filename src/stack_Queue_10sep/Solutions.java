@@ -55,7 +55,33 @@ public class Solutions {
         return ans;
     }
 
-    public static void main(String[] args) {
+    public static int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int [] ans = new int[n];
 
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 2 * n; i >= 0 ; i--) {
+
+            int num = nums[i % n];
+
+            while (!stack.isEmpty() && nums[stack.peek()] < num) {
+                stack.pop();
+            }
+
+            if (stack.isEmpty()) {
+                ans[i % n] = -1;
+            }else{
+                ans[i %n] = stack.peek();
+            }
+            stack.push(i);
+        }
+
+       return ans;
+    }
+
+    public static void main(String[] args) {
+      int [] nums = {1,2,1};
+        System.out.println(Arrays.toString(nextGreaterElements(nums)));
     }
 }
