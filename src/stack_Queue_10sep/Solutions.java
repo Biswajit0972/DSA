@@ -1,7 +1,6 @@
 package stack_Queue_10sep;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 public class Solutions {
     public static  boolean isValid(String s) {
@@ -80,8 +79,27 @@ public class Solutions {
        return ans;
     }
 
+    public static ArrayList<Integer> nextSmallerEle(int[] arr) {
+        int n = arr.length;
+        ArrayList<Integer> ans = new ArrayList<>(Collections.nCopies(n, -1));
+        Deque<Integer> stack = new ArrayDeque<>(); // faster than Stack
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && stack.peek() >= arr[i]) {
+                stack.pop();
+            }
+
+            if (!stack.isEmpty()) {
+                ans.set(i, stack.peek());
+            }
+            stack.push(arr[i]);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
-      int [] nums = {1,2,1};
-        System.out.println(Arrays.toString(nextGreaterElements(nums)));
+      int [] nums = {4, 8, 5, 2, 25};
+        System.out.println(Arrays.toString(new ArrayList[]{nextSmallerEle(nums)}));
     }
 }
