@@ -98,8 +98,24 @@ public class Solutions {
         return ans;
     }
 
+    public static int[] count_NGE(int arr[], int indices[]) {
+        int [] ans = new int[indices.length];
+
+        for (int i = 0; i < indices.length; i++) {
+            int index = indices[i];
+            int count = 0;
+            for (int j = index + 1; j < arr.length; j++) {
+                if (arr[j] > arr[index]) {
+                    count++;
+                }
+            }
+            ans[i] = count;
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
       int [] nums = {4, 8, 5, 2, 25};
-        System.out.println(Arrays.toString(new ArrayList[]{nextSmallerEle(nums)}));
-    }
-}
+        System.out.println(Arrays.toString(count_NGE(nums, new  int[ ] {0,3})));
+
+}}
