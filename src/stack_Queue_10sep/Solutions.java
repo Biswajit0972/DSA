@@ -158,9 +158,42 @@ public class Solutions {
         return sum;
     }
 
+    public static int[] asteroidCollision(int[] asteroids) {
+        if (asteroids == null || asteroids.length == 0) {
+            return asteroids;
+        }
+
+        Deque<Integer> stack = new ArrayDeque<>();
+
+        for (int cur : asteroids) {
+            if (cur > 0) {
+                // moving right → push
+                stack.push(cur);
+            } else {
+                // moving left → collision checks
+                while (!stack.isEmpty() && stack.peek() > 0 && stack.peek() < Math.abs(cur)) {
+                    stack.pop();
+                }
+
+                if (!stack.isEmpty() && stack.peek() == Math.abs(cur)) {
+                    stack.pop(); // both explode
+                } else if (stack.isEmpty() || stack.peek() < 0) {
+                    stack.push(cur); // safe to add
+                }
+            }
+        }
+
+        // stack contains surviving asteroids, but in reverse order
+        int[] res = new int[stack.size()];
+        for (int i = res.length - 1; i >= 0; i--) {
+            res[i] = stack.pop();
+        }
+        return res;
+    }
+
 
     public static void main(String[] args) {
-      int [] nums = {3,1,2,4};
-        System.out.println(sumSubarrayMins(nums));
+      int [] nums = {5,10,-5};
+        System.out.println(Arrays.toString(asteroidCollision(nums)));
 
 }}
