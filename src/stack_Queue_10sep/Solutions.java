@@ -148,12 +148,14 @@ public class Solutions {
     public static int sumSubarrayMins(int[] arr) {
         int n = arr.length;
         int sum = 0;
-        for  (int i = 0; i < n; i++) {
-            int min = Integer.MAX_VALUE;
-            for (int j = i; j < n; j++) {
-                min = Math.min(min, arr[j]);
-                sum += min;
-            }
+
+        int [] leftMin = nextSmallerElement(arr);
+        int [] rightMin = previousSmallerElement(arr);
+
+        for (int i = 0; i < n; i++) {
+            int left = i - leftMin[i];
+            int right = rightMin[i] - i;
+            sum += left * right * arr[i];
         }
         return sum;
     }
@@ -191,9 +193,59 @@ public class Solutions {
         return res;
     }
 
+    public static long subArrayRanges(int[] nums) {
+        // ? Global sum
+        long totalSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int min = Integer.MAX_VALUE;
+            int max = Integer.MIN_VALUE;
+            for (int j = i; j < nums.length; j++) {
+                min = Math.min(min, nums[j]);
+                max = Math.max(max, nums[j]);
+                totalSum += max - min;
+            }
+        }
+
+        return totalSum;
+    }
+
+    public static int []  nextSmallerElement(int [] nums) {
+       int [] nextSmallerIndex = new int [nums.length];
+       int n = nums.length;
+       Stack<Integer> stack = new Stack<>();
+
+       for (int i = n-1; i>= 0;i--) {
+           while (!stack.isEmpty() && nums[stack.peek()] >= nums[i]) {
+               stack.pop();
+           }
+
+           nextSmallerIndex[i] = stack.isEmpty() ? n : stack.peek();
+           stack.push(i);
+       }
+
+       return nextSmallerIndex;
+    }
+
+    public static int[] previousSmallerElement(int [] nums) {
+       int [] previousSmallerIndex = new int [nums.length];
+       int n = nums.length;
+       Stack<Integer> stack = new Stack<>();
+
+       for (int i = 0; i< n;i++) {
+           while (!stack.isEmpty() && nums[stack.peek()] > nums[i]) {
+               stack.pop();
+           }
+
+           previousSmallerIndex [i] = stack.isEmpty() ? -1 : stack.peek();
+           stack.push(i);
+       }
+       return previousSmallerIndex;
+    }
+
 
     public static void main(String[] args) {
-      int [] nums = {5,10,-5};
-        System.out.println(Arrays.toString(asteroidCollision(nums)));
-
+      int [] nums = {3,1,2,4};
+        System.out.println(Arrays.toString(nextSmallerElement(nums)));
+        System.out.println(Arrays.toString(previousSmallerElement(nums)));
+        System.out.println(sumSubarrayMins( nums));
 }}
