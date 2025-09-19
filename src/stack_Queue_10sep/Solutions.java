@@ -193,21 +193,6 @@ public class Solutions {
         return res;
     }
 
-    public static long subArrayRanges(int[] nums) {
-        // ? Global sum
-        long totalSum = 0;
-        for (int i = 0; i < nums.length; i++) {
-            int min = Integer.MAX_VALUE;
-            int max = Integer.MIN_VALUE;
-            for (int j = i; j < nums.length; j++) {
-                min = Math.min(min, nums[j]);
-                max = Math.max(max, nums[j]);
-                totalSum += max - min;
-            }
-        }
-
-        return totalSum;
-    }
 
     public static int []  nextSmallerElement(int [] nums) {
        int [] nextSmallerIndex = new int [nums.length];
@@ -242,10 +227,71 @@ public class Solutions {
        return previousSmallerIndex;
     }
 
+    public static long upSumSubarrayMins(int[] arr) {
+        int n = arr.length;
+        long sum = 0;
+
+        int [] leftMin = nextSmallerElement(arr);
+        int [] rightMin = previousSmallerElement(arr);
+
+        for (int i = 0; i < n; i++) {
+            int left = i - leftMin[i];
+            int right = rightMin[i] - i;
+            sum += left * right * (long) arr[i];
+        }
+        return sum;
+    }
+
+    public static int[] nextGreaterElement(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && nums[stack.peek()] <= nums[i]) {
+                stack.pop();
+            }
+            ans[i] = stack.isEmpty() ? n : stack.peek();
+            stack.push(i);
+        }
+        return ans;
+    }
+
+    public static int[] previousGreaterElement(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && nums[stack.peek()] < nums[i]) {
+                stack.pop();
+            }
+            ans[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(i);
+        }
+        return ans;
+    }
+
+    public static long subArraySumMaximum(int[] nums) {
+        int[] leftMax = previousGreaterElement(nums);
+        int[] rightMax = nextGreaterElement(nums);
+        int n = nums.length;
+        long sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            long leftSum = i - leftMax[i];
+            long rightSum = rightMax[i] - i;
+            sum += leftSum * rightSum * (long) nums[i];
+        }
+        return sum;
+    }
+
+    public static long subArrayRanges(int[] nums) {
+        return subArraySumMaximum(nums) - upSumSubarrayMins(nums);
+    }
 
     public static void main(String[] args) {
-      int [] nums = {3,1,2,4};
-        System.out.println(Arrays.toString(nextSmallerElement(nums)));
-        System.out.println(Arrays.toString(previousSmallerElement(nums)));
-        System.out.println(sumSubarrayMins( nums));
+     int [] nums = {4,-2,-3,4,1};
+
+        System.out.println(subArrayRanges(nums));
 }}
