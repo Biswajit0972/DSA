@@ -3,14 +3,14 @@ package stack_Queue_10sep;
 import java.util.*;
 
 public class Solutions {
-    public static  boolean isValid(String s) {
-        Stack<Character>  stack = new Stack<>();
-        for  (int i = 0; i < s.length(); i++) {
-            char  ch = s.charAt(i);
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
 
             if (ch == '(' || ch == '{' || ch == '[') {
                 stack.push(ch);
-            }else {
+            } else {
                 if (stack.isEmpty()) {
                     return false;
                 }
@@ -33,12 +33,12 @@ public class Solutions {
     public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int n = nums1.length;
         int m = nums2.length;
-        int [] ans = new int[n];
+        int[] ans = new int[n];
         Arrays.fill(ans, -1);
 
         for (int i = 0; i < n; i++) {
             int num = nums1[i];
-            for  (int  j = 0 ; j < m; j++) {
+            for (int j = 0; j < m; j++) {
                 if (nums2[j] == num) {
                     for (int k = j + 1; k < m; k++) {
                         if (nums2[k] > num) {
@@ -56,11 +56,11 @@ public class Solutions {
 
     public static int[] nextGreaterElements(int[] nums) {
         int n = nums.length;
-        int [] ans = new int[n];
+        int[] ans = new int[n];
 
         Stack<Integer> stack = new Stack<>();
 
-        for (int i = 2 * n; i >= 0 ; i--) {
+        for (int i = 2 * n; i >= 0; i--) {
 
             int num = nums[i % n];
 
@@ -70,13 +70,13 @@ public class Solutions {
 
             if (stack.isEmpty()) {
                 ans[i % n] = -1;
-            }else{
-                ans[i %n] = stack.peek();
+            } else {
+                ans[i % n] = stack.peek();
             }
             stack.push(i);
         }
 
-       return ans;
+        return ans;
     }
 
     public static ArrayList<Integer> nextSmallerEle(int[] arr) {
@@ -99,7 +99,7 @@ public class Solutions {
     }
 
     public static int[] count_NGE(int arr[], int indices[]) {
-        int [] ans = new int[indices.length];
+        int[] ans = new int[indices.length];
 
         for (int i = 0; i < indices.length; i++) {
             int index = indices[i];
@@ -116,8 +116,8 @@ public class Solutions {
 
     public static int trap(int[] height) {
         int n = height.length;
-        int [] leftMax = new int[n];
-        int [] rightMax = new int[n];
+        int[] leftMax = new int[n];
+        int[] rightMax = new int[n];
 
         leftMax[0] = height[0];
 
@@ -130,13 +130,13 @@ public class Solutions {
             rightMax[i] = Math.max(height[i], rightMax[i + 1]);
         }
 
-        int trapWater =0;
+        int trapWater = 0;
         for (int i = 0; i < n; i++) {// O(n)
             int min = Math.min(leftMax[i], rightMax[i]);
             if (min > height[i]) {
                 trapWater += min - height[i];
-            }else {
-                trapWater +=  height[i] - min;
+            } else {
+                trapWater += height[i] - min;
             }
         }
 
@@ -149,8 +149,8 @@ public class Solutions {
         int n = arr.length;
         int sum = 0;
 
-        int [] leftMin = nextSmallerElement(arr);
-        int [] rightMin = previousSmallerElement(arr);
+        int[] leftMin = nextSmallerElement(arr);
+        int[] rightMin = previousSmallerElement(arr);
 
         for (int i = 0; i < n; i++) {
             int left = i - leftMin[i];
@@ -194,45 +194,45 @@ public class Solutions {
     }
 
 
-    public static int []  nextSmallerElement(int [] nums) {
-       int [] nextSmallerIndex = new int [nums.length];
-       int n = nums.length;
-       Stack<Integer> stack = new Stack<>();
+    public static int[] nextSmallerElement(int[] nums) {
+        int[] nextSmallerIndex = new int[nums.length];
+        int n = nums.length;
+        Stack<Integer> stack = new Stack<>();
 
-       for (int i = n-1; i>= 0;i--) {
-           while (!stack.isEmpty() && nums[stack.peek()] >= nums[i]) {
-               stack.pop();
-           }
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && nums[stack.peek()] >= nums[i]) {
+                stack.pop();
+            }
 
-           nextSmallerIndex[i] = stack.isEmpty() ? n : stack.peek();
-           stack.push(i);
-       }
+            nextSmallerIndex[i] = stack.isEmpty() ? n : stack.peek();
+            stack.push(i);
+        }
 
-       return nextSmallerIndex;
+        return nextSmallerIndex;
     }
 
-    public static int[] previousSmallerElement(int [] nums) {
-       int [] previousSmallerIndex = new int [nums.length];
-       int n = nums.length;
-       Stack<Integer> stack = new Stack<>();
+    public static int[] previousSmallerElement(int[] nums) {
+        int[] previousSmallerIndex = new int[nums.length];
+        int n = nums.length;
+        Stack<Integer> stack = new Stack<>();
 
-       for (int i = 0; i< n;i++) {
-           while (!stack.isEmpty() && nums[stack.peek()] > nums[i]) {
-               stack.pop();
-           }
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && nums[stack.peek()] > nums[i]) {
+                stack.pop();
+            }
 
-           previousSmallerIndex [i] = stack.isEmpty() ? -1 : stack.peek();
-           stack.push(i);
-       }
-       return previousSmallerIndex;
+            previousSmallerIndex[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(i);
+        }
+        return previousSmallerIndex;
     }
 
     public static long upSumSubarrayMins(int[] arr) {
         int n = arr.length;
         long sum = 0;
 
-        int [] leftMin = nextSmallerElement(arr);
-        int [] rightMin = previousSmallerElement(arr);
+        int[] leftMin = nextSmallerElement(arr);
+        int[] rightMin = previousSmallerElement(arr);
 
         for (int i = 0; i < n; i++) {
             int left = i - leftMin[i];
@@ -290,8 +290,42 @@ public class Solutions {
         return subArraySumMaximum(nums) - upSumSubarrayMins(nums);
     }
 
-    public static void main(String[] args) {
-     int [] nums = {4,-2,-3,4,1};
+    public static String removeKdigits(String num, int k) {
+        int n = num.length();
+        Deque<Character> stack = new ArrayDeque<>();
 
-        System.out.println(subArrayRanges(nums));
-}}
+        for (int i = 0; i < n; i++) {
+            char ch = num.charAt(i);
+
+            while (!stack.isEmpty() && k > 0 && stack.peek() > ch) {
+                stack.pop();
+                k--;
+            }
+
+            stack.push(ch);
+        }
+
+        while (k > 0 && !stack.isEmpty()) {
+            stack.pop();
+            k--;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+
+        int i = 0;
+        while (i < sb.length() && sb.charAt(i) == '0') {
+            i++;
+        }
+
+        return i == sb.length() ? "0" : sb.substring(i);
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {4, -2, -3, 4, 1};
+
+        System.out.println(removeKdigits("10200", 1));
+    }
+}
