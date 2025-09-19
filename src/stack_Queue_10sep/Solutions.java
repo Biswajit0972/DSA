@@ -252,6 +252,8 @@ public class Solutions {
                 stack.pop();
             }
             ans[i] = stack.isEmpty() ? n : stack.peek();
+            //update condition for largest rectangle
+//            ans[i] = stack.isEmpty() ? nums[i] : stack.peek();
             stack.push(i);
         }
         return ans;
@@ -266,7 +268,8 @@ public class Solutions {
             while (!stack.isEmpty() && nums[stack.peek()] < nums[i]) {
                 stack.pop();
             }
-            ans[i] = stack.isEmpty() ? -1 : stack.peek();
+                        ans[i] = stack.isEmpty() ? -1 : stack.peek();
+            //update condition for largest rectangle
             stack.push(i);
         }
         return ans;
@@ -323,9 +326,23 @@ public class Solutions {
         return i == sb.length() ? "0" : sb.substring(i);
     }
 
-    public static void main(String[] args) {
-        int[] nums = {4, -2, -3, 4, 1};
+    public static int largestRectangleArea(int[] heights) {
+        int maxRectangle = 0;
+        int n = heights.length;
+        int[] leftMax = previousSmallerElement(heights);
+        int[] rightMax = nextSmallerElement(heights);
 
-        System.out.println(removeKdigits("10200", 1));
+        for (int i = 0; i < n; i++) {
+            int width = rightMax[i] - leftMax[i] - 1;
+            int area = heights[i] * width;
+            maxRectangle = Math.max(maxRectangle, area);
+        }
+        return maxRectangle;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2,1,5,6,2,3};
+
+        System.out.println(largestRectangleArea(nums));
     }
 }
