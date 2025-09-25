@@ -82,6 +82,31 @@ public class Solutions {
         return true;
     }
 
+    //! Question 3: Majority Element
+    //? Brute Force
+
+    public static int majorityElement(int[] nums) {
+        int n = nums.length;
+
+        for (int  i = 0; i < n; i++) {
+            int count = 1;
+            for (int j = i +1 ; j< n; j++) {
+                if (nums[i] == nums[j]) {
+                    count++;
+                }
+                if (count > n/2) {
+                    return nums[i];
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    // ? Optimized using a voting algorithm
+
+
+
     public static void main(String[] args) {
         int[] testingArr = {-5, 8, -14, 2, 4, 12};
         System.out.println(longestSubarray(testingArr, -5));
