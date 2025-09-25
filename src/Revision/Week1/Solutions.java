@@ -69,7 +69,18 @@ public class Solutions {
     */
 
     // * The above code is not valid for most of the cases❎,Instead can that we count how many previous elements are greater than the current element by circularly [arr[i+1] %  n]
+    public static boolean check(int[] nums) {
+        int count = 0;
 
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[(i + 1) % nums.length]) {
+                count++;
+            }
+            if (count > 1) return false;
+        }
+
+        return true;
+    }
 
     public static void main(String[] args) {
         int[] testingArr = {-5, 8, -14, 2, 4, 12};
