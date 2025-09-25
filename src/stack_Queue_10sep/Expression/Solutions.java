@@ -107,6 +107,7 @@ public class Solutions {
         if (s == null || s.isEmpty()) {
             return s;
         }
+
         s = reverse(s);
 
         String postFix  = infixToPostfix2(s);
