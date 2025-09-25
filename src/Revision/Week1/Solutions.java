@@ -50,6 +50,27 @@ public class Solutions {
         return maxLength;
     }
 
+    //! Question 2: Check if Array Originally Sorted and Rotated
+/*
+    public static boolean check(int[] nums) {
+        boolean isSorted = true;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < nums[i - 1]) {
+                isSorted = false;
+                break;
+            }
+        }
+
+        if (isSorted) return true;
+
+        return nums[0] > nums[nums.length - 1];
+    }
+    */
+
+    // * The above code is not valid for most of the cases❎,Instead can that we count how many previous elements are greater than the current element by circularly [arr[i+1] %  n]
+
+
     public static void main(String[] args) {
         int[] testingArr = {-5, 8, -14, 2, 4, 12};
         System.out.println(longestSubarray(testingArr, -5));
