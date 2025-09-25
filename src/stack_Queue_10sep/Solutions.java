@@ -161,6 +161,7 @@ public class Solutions {
     }
 
     public static int[] asteroidCollision(int[] asteroids) {
+
         if (asteroids == null || asteroids.length == 0) {
             return asteroids;
         }
