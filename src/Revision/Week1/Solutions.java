@@ -84,7 +84,7 @@ public class Solutions {
 
     //! Question 3: Majority Element
     //? Brute Force
-
+/*
     public static int majorityElement(int[] nums) {
         int n = nums.length;
 
@@ -102,13 +102,42 @@ public class Solutions {
 
         return -1;
     }
+*/
 
     // ? Optimized using a voting algorithm
 
+    public static int majorityElement(int[] nums) {
+        int n = nums.length;
+        int candidate = nums[0];
+        int count = 1;
 
+        for (int i  = 1; i<n; i++) {
+            if (count ==  0) {
+                candidate =  nums[i];
+                count++;
+            }else {
+                if (candidate == nums[i]) {
+                    count++;
+                }else {
+                    count--;
+                }
+            }
+        }
+        count = 0;
+        for (int num : nums) {
+            if (num == candidate) {
+                count++;
+            }
+
+            if (count > n/2) {
+                return candidate;
+            }
+        }
+        return 0;
+    }
 
     public static void main(String[] args) {
-        int[] testingArr = {-5, 8, -14, 2, 4, 12};
-        System.out.println(longestSubarray(testingArr, -5));
+        int[] testingArr = {2,2,1,1,1,2,2};
+        System.out.println(majorityElement(testingArr));
     }
 }
