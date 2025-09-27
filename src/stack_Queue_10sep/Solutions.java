@@ -269,7 +269,7 @@ public class Solutions {
             while (!stack.isEmpty() && nums[stack.peek()] < nums[i]) {
                 stack.pop();
             }
-                        ans[i] = stack.isEmpty() ? -1 : stack.peek();
+            ans[i] = stack.isEmpty() ? -1 : stack.peek();
             //update condition for largest rectangle
             stack.push(i);
         }
@@ -341,9 +341,82 @@ public class Solutions {
         return maxRectangle;
     }
 
-    public static void main(String[] args) {
-        int[] nums = {2,1,5,6,2,3};
+    //! Question: 901 online stock span
 
-        System.out.println(largestRectangleArea(nums));
+    static class StockSpanner {
+        /**
+         ArrayList<Integer> store;
+
+         public StockSpanner() {
+         store = new ArrayList<>();
+         }
+         */
+
+        /**
+         * Price The current price of the stock! The worst case it can be going O(n), but if we use this function in loop it could be goes O(n^2)
+         * public int next(int price) {
+         * store.add(price);
+         * int n = store.size();
+         * <p>
+         * int span = 0;
+         * <p>
+         * for (int i = n - 1; i >= 0; i--) {
+         * if (store.get(i) <= price) {
+         * span++;
+         * }else {
+         * break;
+         * }
+         * }
+         * <p>
+         * return span;
+         * }
+         */
+
+        Stack <int []> stack;
+
+        public StockSpanner() {
+            stack = new Stack<>();
+        }
+
+        public int next(int price) {
+            int span = 1;
+
+            while (!stack.isEmpty() && stack.peek()[0] <= price) {
+                span += stack.peek()[1];
+            }
+
+            stack.push(new int [] {price, span});
+            return span;
+        }
+    }
+
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int sum = 0;
+        int [] maxSums  = new int[nums.length];
+        int n = nums.length;
+
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+
+        maxSums[0] = sum;
+        int z = 1;
+        for (int i = k; i < n; i++) {
+            sum += nums[i] - nums[i - k];
+            maxSums[i] = Math.max(maxSums[z-1], sum);
+        }
+
+        return maxSums;
+    }
+
+    public static void main(String[] args) {
+        StockSpanner sc = new StockSpanner();
+        System.out.println(sc.next(100));
+        System.out.println(sc.next(80));
+        System.out.println(sc.next(60));
+        System.out.println(sc.next(70));
+        System.out.println(sc.next(60));
+        System.out.println(sc.next(75));
+        System.out.println(sc.next(85));
     }
 }
