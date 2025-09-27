@@ -28,9 +28,27 @@ public class Solutions {
         return maxUniqueLength;
     }
 
+    // ! Optimal approach
+    public static int lengthOfLongestSubstringOptimal(String s) {
+        int n = s.length();
+        int maxUniqueLength = 0;
+        HashMap<Character, Integer> store = new HashMap<>();
+        int left = 0;
 
+        for (int i = 0; i < n; i++) {
+            char currCharacter = s.charAt(i);
+            if (store.containsKey(currCharacter)) {
+                if (left <= store.get(currCharacter)) {
+                    left = store.get(currCharacter) + 1;
+                }
+            }
+            maxUniqueLength = Math.max(maxUniqueLength, i - left + 1);
+            store.put(currCharacter, i);
+        }
 
+        return maxUniqueLength;
+    }
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("pwwkew"));
+        System.out.println(lengthOfLongestSubstringOptimal("pwwkew"));
     }
 }
