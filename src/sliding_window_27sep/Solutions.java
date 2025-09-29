@@ -68,6 +68,22 @@ public class Solutions {
         return maxLength;
     }
 
+    // ! Question 3: (Easy) Contains Duplicate II
+
+    public static boolean containsNearbyDuplicate(int[] nums, int k) {
+      HashMap<Integer, Integer> store = new HashMap<>();
+
+      for (int i = 0; i < nums.length; i++) {
+          if (store.containsKey(nums[i])) {
+              if (Math.abs(i - store.get(nums[i])) <= k) {
+                  return true;
+              }
+          }
+          store.put(nums[i], i);
+      }
+      return false;
+    }
+
     public static void main(String[] args) {
         System.out.println(lengthOfLongestSubstringOptimal("pwwkew"));
     }
