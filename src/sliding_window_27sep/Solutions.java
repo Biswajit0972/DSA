@@ -1,5 +1,6 @@
 package sliding_window_27sep;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Solutions {
@@ -82,6 +83,26 @@ public class Solutions {
           store.put(nums[i], i);
       }
       return false;
+    }
+
+    public int findLHS(int[] nums) {
+        Arrays.sort(nums);
+        int left = 0, right = 1;
+        int length = 0;
+
+        while (right < nums.length) {
+            int diff = nums[right] - nums[left];
+
+            if (diff == 1) {
+                length =  Math.max(length, right - left + 1);
+            }else if (diff <= 1) {
+                right++;
+            }else {
+                left++;
+            }
+        }
+
+        return length;
     }
 
     public static void main(String[] args) {
