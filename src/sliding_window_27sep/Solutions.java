@@ -48,6 +48,26 @@ public class Solutions {
 
         return maxUniqueLength;
     }
+
+    public int longestOnes(int[] nums, int k) {
+        int maxLength = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int zeroCount = 0;
+            for (int j = i; j < nums.length; j++) {
+                if (nums[j] == 0) {
+                    zeroCount++;
+                }
+
+                if (zeroCount > k) {
+                    break;
+                }
+                maxLength = Math.max(maxLength, j - i +1);
+            }
+        }
+
+        return maxLength;
+    }
+
     public static void main(String[] args) {
         System.out.println(lengthOfLongestSubstringOptimal("pwwkew"));
     }
