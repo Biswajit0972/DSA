@@ -125,6 +125,28 @@ public class Solutions {
         return maxLength;
     }
 
+    public int longestOnesOptimal(int[] nums, int k) {
+        int maxLength = 0;
+        int zeroCount = 0;
+        int left = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                zeroCount++;
+            }
+
+            while (zeroCount > k) {
+                if (nums[left] == 0) {
+                    zeroCount--;
+                }
+                left++;
+            }
+
+            maxLength = Math.max(maxLength, i - left +1);
+        }
+
+        return maxLength;
+    }
+
     public static void main(String[] args) {
        int [] test  = {};
     }
