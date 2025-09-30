@@ -49,27 +49,7 @@ public class Solutions {
 
         return maxUniqueLength;
     }
-
-    public int longestOnes(int[] nums, int k) {
-        int maxLength = 0;
-        for (int i = 0; i < nums.length; i++) {
-            int zeroCount = 0;
-            for (int j = i; j < nums.length; j++) {
-                if (nums[j] == 0) {
-                    zeroCount++;
-                }
-
-                if (zeroCount > k) {
-                    break;
-                }
-                maxLength = Math.max(maxLength, j - i +1);
-            }
-        }
-
-        return maxLength;
-    }
-
-    // ! Question 3: (Easy) Contains Duplicate II
+    // ! Question 1: (Easy) Contains Duplicate II
 
     public static boolean containsNearbyDuplicate(int[] nums, int k) {
       HashMap<Integer, Integer> store = new HashMap<>();
@@ -84,7 +64,7 @@ public class Solutions {
       }
       return false;
     }
-
+    // ! Question 2 : (Easy) findLHS
     public int findLHS(int[] nums) {
         Arrays.sort(nums);
         int left = 0, right = 1;
@@ -104,7 +84,7 @@ public class Solutions {
 
         return length;
     }
-
+    // ! Question 3 : (Easy) findLHS
     public double findMaxAverage(int[] nums, int k) {
         double maxAvg = 0.0;
         double sum = 0;
@@ -124,7 +104,28 @@ public class Solutions {
         return maxAvg;
     }
 
+    //! Question 1: Medium
+    public int longestOnes(int[] nums, int k) {
+        int maxLength = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int zeroCount = 0;
+            for (int j = i; j < nums.length; j++) {
+                if (nums[j] == 0) {
+                    zeroCount++;
+                }
+
+                if (zeroCount > k) {
+                    break;
+                }
+
+                maxLength = Math.max(maxLength, j - i +1);
+            }
+        }
+
+        return maxLength;
+    }
+
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstringOptimal("pwwkew"));
+       int [] test  = {};
     }
 }
