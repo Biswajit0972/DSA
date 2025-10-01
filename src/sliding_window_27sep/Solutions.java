@@ -185,8 +185,35 @@ public class Solutions {
         return count;
     }
 
+    public static int numberOfSubarrays(int[] nums, int k) {
+        int goodSubarrays = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            int count =0;
+            for (int j = i; j < nums.length; j++) {
+                if (!isEven(nums[j])) {
+                    count++;
+                }
+
+                if (count == k) {
+                    goodSubarrays++;
+                }
+
+                if (count > k) {
+                    break;
+                }
+            }
+        }
+
+        return goodSubarrays;
+    }
+
+    public static boolean isEven(int n) {
+        return n % 2 == 0;
+    }
+
     public static void main(String[] args) {
-       int [] test  = {0,0,0,0,0};
-        System.out.println(numSubarraysWithSum(test, 0) );
+       int [] test  = {1,1,2,1,1};
+        System.out.println(numSubarraysWithSum(test, 3) );
     }
 }
