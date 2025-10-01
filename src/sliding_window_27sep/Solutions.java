@@ -167,9 +167,26 @@ public class Solutions {
 //        return totalFruitCount;
 //    }
 
+    public static int numSubarraysWithSum(int[] nums, int goal) {
+        int count =0;
+        int sum = 0;
+        int left = 0;
 
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            while (sum > goal && left < i) {
+                sum -= nums[left];
+                left++;
+            }
+
+            count += i - left +1;
+        }
+
+        return count;
+    }
 
     public static void main(String[] args) {
-       int [] test  = {};
+       int [] test  = {0,0,0,0,0};
+        System.out.println(numSubarraysWithSum(test, 0) );
     }
 }
