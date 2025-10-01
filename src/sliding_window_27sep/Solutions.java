@@ -212,8 +212,31 @@ public class Solutions {
         return n % 2 == 0;
     }
 
+    public static int numberOfSubarraysOptimal(int[] nums, int k) {
+        int count = 0;
+        int left = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!isEven(nums[i])) {
+                count++;
+            }
+
+            while (count > k) {
+                if (!isEven(nums[left])) {
+                    count--;
+                }
+                left++;
+            }
+
+            count += i - left +1;
+
+        }
+
+        return count;
+    }
+
     public static void main(String[] args) {
-       int [] test  = {1,1,2,1,1};
-        System.out.println(numSubarraysWithSum(test, 3) );
+       int [] test  = {2,4,6};
+        System.out.println(numSubarraysWithSum(test, 1) - numSubarraysWithSum(test, 0));
     }
 }
