@@ -147,6 +147,28 @@ public class Solutions {
         return maxLength;
     }
 
+//    public int totalFruit(int[] fruits) {
+//        int totalFruitCount = 0;
+//        int left = 0;
+//        HashMap<Integer, Integer> store = new HashMap<>();
+//
+//        for (int i = 0; i < fruits.length; i++) {
+//            while (store.size() > 2) {
+//                store.put(fruits[left], store.get(fruits[left]) - 1);
+//                left++;
+//                if (store.get(fruits[left]) == 0) {
+//                    store.remove(fruits[left]);
+//                }
+//            }
+//            totalFruitCount = Math.max(totalFruitCount, i - left + 1);
+//            store.put(fruits[i], store.getOrDefault(fruits[i], 0) + 1);
+//        }
+//
+//        return totalFruitCount;
+//    }
+
+
+
     public static void main(String[] args) {
        int [] test  = {};
     }
