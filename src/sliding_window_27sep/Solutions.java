@@ -252,6 +252,7 @@ public class Solutions {
 
         return countSubarray;
     }
+
     public static int numberOfSubstringsOptimal(String s) {
         int countSubarray= 0;
         for (int i = 0; i < s.length(); i++) {
@@ -269,8 +270,23 @@ public class Solutions {
         return countSubarray;
     }
 
+    public static int numberOfSubstringsOptimized (String s) {
+        int count = 0;
+        int [] record = new int[3];
+        Arrays.fill(record, -1);
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            record[ch - 'a'] = i;
+            if (record[0] != -1 && record[1]  != -1 && record[2]  !=-1) {
+                count += (1 + Math.min(record[0],Math.min(record[1], record[2])));
+            }
+        }
+
+        return count;
+    }
     public static void main(String[] args) {
        int [] test  = {2,4,6};
-        System.out.println(numSubarraysWithSum(test, 1) - numSubarraysWithSum(test, 0));
+        System.out.println(numberOfSubstringsOptimized("abc"));
     }
 }
