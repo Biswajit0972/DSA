@@ -235,6 +235,24 @@ public class Solutions {
         return count;
     }
 
+    // ! Question 4: (Medium) Number of Substrings Containing All Three Characters
+
+    public static int numberOfSubstrings(String s) {
+        int countSubarray= 0;
+        for (int i = 0; i < s.length(); i++) {
+            int [] record = new int [26];
+            for (int j = i; j < s.length(); j++) {
+                char ch = s.charAt(j);
+                record[ch - 'a']++;
+                if (record[0] >= 1 && record[1] >= 1 && record[2] >= 1) {
+                    countSubarray++;
+                }
+            }
+        }
+
+        return countSubarray;
+    }
+
     public static void main(String[] args) {
        int [] test  = {2,4,6};
         System.out.println(numSubarraysWithSum(test, 1) - numSubarraysWithSum(test, 0));
