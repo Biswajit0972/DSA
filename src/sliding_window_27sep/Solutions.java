@@ -287,6 +287,7 @@ public class Solutions {
     }
     public static void main(String[] args) {
        int [] test  = {2,4,6};
-        System.out.println(numberOfSubstringsOptimized("abc"));
+
+        System.out.println(0 ^ 1);
     }
 }
