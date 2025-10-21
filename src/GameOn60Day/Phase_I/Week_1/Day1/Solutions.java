@@ -27,8 +27,47 @@ public class Solutions {
 
         return res;
     }
+    public static List<Integer> majorityElement(int[] nums) {
+    List<Integer> res = new ArrayList<>();
+    if (nums.length == 0) return res;
 
+    int candidate1 = 0, candidate2 = 1;
+    int count1 = 0, count2 = 0;
+    
+    // First pass: Find potential candidates
+    for (int num : nums) {
+        if (num == candidate1) {
+            count1++;
+        } else if (num == candidate2) {
+            count2++;
+        } else if (count1 == 0) {
+            candidate1 = num;
+            count1 = 1;
+        } else if (count2 == 0) {
+            candidate2 = num;
+            count2 = 1;
+        } else {
+            count1--;
+            count2--;
+        }
+    }
+    
+    // Second pass: Verify candidates
+    count1 = 0;
+    count2 = 0;
+    for (int num : nums) {
+        if (num == candidate1) count1++;
+        else if (num == candidate2) count2++;
+    }
+    
+    int threshold = nums.length / 3;
+    if (count1 > threshold) res.add(candidate1);
+    if (count2 > threshold) res.add(candidate2);
+    
+    return res;
+}
+    
     public static void main(String[] args) {
-        System.out.println(2/3);
+        System.out.println(majorityElement(new int[]{1,1,1,3,3,2,2,2}));
     }
 }
