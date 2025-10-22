@@ -113,9 +113,83 @@ public class Solutions {
         return res;
     }
 
+    /**
+     * Finds all unique quadruplets in the array that sum up to the target value.
+     * Uses a two-pointer technique with nested loops to find combinations of four numbers.
+     * 
+     * <p>Algorithm:
+     * <ul>
+     *   <li>Sorts the array first for efficient duplicate handling</li>
+     *   <li>Uses two outer loops to fix first two numbers (i and j)</li>
+     *   <li>Uses two pointers (left and right) to find remaining two numbers</li>
+     *   <li>Skips duplicates to ensure unique quadruplets</li>
+     * </ul>
+     * 
+     * <p>Time Complexity: O(n³) where n is the length of the array
+     * <br>Space Complexity: O(1) excluding the result list
+     * 
+     * @param nums the input array of integers
+     * @param target the target sum to find
+     * @return a list of all unique quadruplets [nums[i], nums[j], nums[k], nums[l]] 
+     *         such that nums[i] + nums[j] + nums[k] + nums[l] == target
+     */
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i =0; i <  n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int left = j + 1, right = n - 1;
+                while (left < right) {
+                    long sum = (long) nums[i] + nums[j] + nums[left] + nums[right];
+                    if (sum == target) {
+                        res.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                        while (left < n-1 && nums[left] == nums[left + 1]) left++;
+                        while (right > left && nums[right] == nums[right - 1]) right--;
+                        left++;
+                        right--;
+                    } else if (sum < target) {
+                        left++;
+                    }else {
+                        right--;
+                    }
+                }
+                while (j < n-1 && nums[j] == nums[j+1]) j++;
+            }
+            while (i < n-1 && nums[i] == nums[i+1]) i++;
+        }
+        return res;
+    }
 
+    static int maxLength(int arr[]) {
+        int maxL  = 0;
+//        for (int i  =0; i < arr.length; i++) {
+//            int sum = arr[i];
+//            for (int j = i + 1; j < arr.length; j++) {
+//                sum += arr[j];
+//                if (sum == 0) {
+//                    maxL = Math.max(maxL, j - i +1);
+//                }
+//            }
+//        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            if (sum == 0) {
+                maxL = Math.max(maxL, i +1);
+                continue;
+            }
+
+            if (map.containsKey(sum)) {
+                maxL = Math.max(maxL, i - map.get(sum) +1);
+            }
+            map.put(sum, i);
+        }
+        return maxL;
+    }
 
     public static void main(String[] args) {
-        System.out.println(majorityElement(new int[]{1,1,1,3,3,2,2,2}));
+        System.out.println(maxLength(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
     }
 }
