@@ -189,7 +189,27 @@ public class Solutions {
         return maxL;
     }
 
+    public static long subarrayXor(int arr[], int k) {
+      /*
+      * Brute force
+      * */
+        long res = 0;
+        HashMap<Integer, Integer> prefixXor = new HashMap<>();
+        int prefix = 0;
+        for (int i = 0; i < arr.length; i++) {
+          prefix ^= arr[i];
+
+          if (prefix == k) res++;
+
+          res += prefixXor.getOrDefault(prefix, 0);
+
+          prefixXor.put(prefix, prefixXor.getOrDefault(prefix, 0) + 1);
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
-        System.out.println(maxLength(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+        System.out.println(subarrayXor(new int[]{1, 1, 1, 1}, 0));
     }
 }
