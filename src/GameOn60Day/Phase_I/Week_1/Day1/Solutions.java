@@ -236,7 +236,14 @@ public class Solutions {
 
         return -1;
     }
+
+    public static int findDuplicate (int[] nums) {
+        int xorAll = 0;
+        for (int i = 0; i < nums.length; i++) xorAll ^= nums[i];   // XOR all array elements
+        for (int i = 1; i < nums.length; i++) xorAll ^= i;         // XOR with range 1..n-1
+        return xorAll;
+    }
     public static void main(String[] args) {
-        System.out.println(subarrayXor(new int[]{1, 1, 1, 1}, 0));
+        System.out.println(findDuplicate(new int[]{1,3,4,2,2}));
     }
 }
