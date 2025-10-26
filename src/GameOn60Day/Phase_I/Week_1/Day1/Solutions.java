@@ -209,6 +209,33 @@ public class Solutions {
         return res;
     }
 
+    public static int singleNonDuplicate(int[] nums) {
+//        HashMap<Integer, Integer> map = new HashMap<>();
+//        for (int  num : nums) {
+//            map.put(num, map.getOrDefault(num, 0) + 1);
+//        }
+//
+//        for  (int num : map.keySet()) {
+//            if (map.get(num) == 1) return num;
+//        }
+//        return -1;
+        int xor = 0;
+        for (int num : nums) {
+            xor ^= num;
+        }
+        return xor;
+    }
+
+    public int findPeakElement(int[] nums) {
+        if (nums[0] > nums[1]) return 0;
+        if (nums[nums.length - 1] > nums[nums.length - 2]) return nums.length - 1;
+
+        for (int i = 1; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i-1] && nums[i] > nums[i+1]) return i;
+        }
+
+        return -1;
+    }
     public static void main(String[] args) {
         System.out.println(subarrayXor(new int[]{1, 1, 1, 1}, 0));
     }
