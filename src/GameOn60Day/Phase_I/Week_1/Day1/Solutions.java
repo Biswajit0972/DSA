@@ -275,12 +275,13 @@ public class Solutions {
         int inversionCount = 0;
         while (i < n1 && j < n2) {
             //!  if I found inversion then update the smaller pointer because another inversion could be possible
-            if (leftArr[i] < rightArr[j]) {
+            if (leftArr[i] <= rightArr[j]) {
                 nums[k++] = leftArr[i++];
             }else {
                 nums[k++] = rightArr[j++];
                 inversionCount += (n1 - i);
             }
+
         }
 
         while (i < n1) {
@@ -290,6 +291,19 @@ public class Solutions {
             nums[k++] = rightArr[j++];
         }
         return inversionCount;
+    }
+
+    public int reversePairs(int[] nums) {
+        int reversepairCount = 0;
+        for (int i = 0; i  < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] > (2 * nums[j])) {
+                    reversepairCount++;
+                }
+            }
+        }
+
+        return reversepairCount;
     }
 
     public static void main(String[] args) {
