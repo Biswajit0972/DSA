@@ -1,5 +1,6 @@
 package GameOn60Day.Phase_I.Week_1.Day1;
 
+
 import java.util.*;
 
 public class Solutions {
@@ -307,6 +308,12 @@ public class Solutions {
     }
 
     public static void main(String[] args) {
-        System.out.println(inversionCount(new int[]{2, 4, 1, 3, 5}));
+        LinkedList <Integer> head = new LinkedList<>();
+        head.add(1);
+        head.add(2);
+        head.add(3);
+        head.add(4);
+        head.add(5);
+
     }
 }
