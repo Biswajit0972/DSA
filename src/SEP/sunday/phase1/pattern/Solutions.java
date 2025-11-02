@@ -74,8 +74,30 @@ public class Solutions {
         sb.deleteCharAt(sb.length()-1);
         printAllSubsequencesOfExpectedSum(nums,  expectedSum, index+1, sb, sum);
     }
+    public static boolean checkSubsequenceSum (int [] nums,  int k, int index,  int   sum ) {
+//        //! base case
+//        if (sum >  k) return false;
+//        if (index == nums.length) {
+//            return sum == k;
+//        }
+//
+//        sum += nums[index];
+//        boolean res1 = checkSubsequenceSum(nums, k, index+1, sum);
+//        sum -= nums[index];
+//        boolean res2 = checkSubsequenceSum(nums, k, index+1, sum);
+//        return res1 || res2;
 
+        //! DP
+        boolean [] dp = new boolean[k+1];
+        dp[0] = true;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = k; j >= nums[i]; j--) {
+                dp[j] = dp[j] || dp[j-nums[i]];
+            }
+        }
+        return dp[k];
+    }
     public static void main(String[] args) {
-        printAllSubsequencesOfExpectedSum(new  int[] {1,2,1}, 2, 0, new StringBuilder(), 0);
+        System.out.println(checkSubsequenceSum(new int[]{1,2,1}, 5, 0, 0));
     }
 }
