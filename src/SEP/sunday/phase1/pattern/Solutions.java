@@ -74,6 +74,7 @@ public class Solutions {
         sb.deleteCharAt(sb.length()-1);
         printAllSubsequencesOfExpectedSum(nums,  expectedSum, index+1, sb, sum);
     }
+
     public static void main(String[] args) {
         printAllSubsequencesOfExpectedSum(new  int[] {1,2,1}, 2, 0, new StringBuilder(), 0);
     }
