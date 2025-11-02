@@ -58,7 +58,23 @@ public class Solutions {
             sb.deleteCharAt(sb.length() - 1);
         }
     }
+
+    public static void printAllSubsequencesOfExpectedSum(int [] nums, int expectedSum, int index, StringBuilder sb, int  sum) {
+        if (index == nums.length) {
+            if (expectedSum == sum) {
+                System.out.println(sb.toString());
+            }
+            return;
+        }
+
+        sum+= nums[index];
+        sb.append(nums[index]);
+        printAllSubsequencesOfExpectedSum(nums,  expectedSum, index+1, sb, sum);
+        sum -= nums[index];
+        sb.deleteCharAt(sb.length()-1);
+        printAllSubsequencesOfExpectedSum(nums,  expectedSum, index+1, sb, sum);
+    }
     public static void main(String[] args) {
-        generateParenthesis(1);
+        printAllSubsequencesOfExpectedSum(new  int[] {1,2,1}, 2, 0, new StringBuilder(), 0);
     }
 }
