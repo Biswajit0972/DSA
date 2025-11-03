@@ -1,5 +1,9 @@
 package SEP.work1.MON;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Solutions {
     public static boolean exist(char[][] board, String word) {
         int rows = board.length, cols = board[0].length;
@@ -38,6 +42,58 @@ public class Solutions {
         visited[i][j] = false;
         return canIGetAnswer;
     }
+
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> ans = new ArrayList<>();
+        char[][] board = new char[n][n];
+
+        // Initialize board with '.'
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(board[i], '.');
+        }
+
+        // Columns, diagonal1, diagonal2 sets to track attacks
+        boolean[] cols = new boolean[n];
+        boolean[] diag1 = new boolean[2 * n];
+        boolean[] diag2 = new boolean[2 * n];
+
+        backtrack(0, n, board, ans, cols, diag1, diag2);
+        return ans;
+    }
+
+    private void backtrack(int row, int n, char[][] board, List<List<String>> ans,
+                           boolean[] cols, boolean[] diag1, boolean[] diag2) {
+
+        // Base case: all queens are placed
+        if (row == n) {
+            List<String> curr = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                curr.add(new String(board[i]));
+            }
+            ans.add(curr);
+            return;
+        }
+
+        // Try placing queen in each column of this row
+        for (int col = 0; col < n; col++) {
+            int d1 = row - col + n; // diagonal1 index
+            int d2 = row + col;     // diagonal2 index
+
+            // If safe position
+            if (!cols[col] && !diag1[d1] && !diag2[d2]) {
+                board[row][col] = 'Q';
+                cols[col] = diag1[d1] = diag2[d2] = true;
+
+                backtrack(row + 1, n, board, ans, cols, diag1, diag2);
+
+                // Backtrack
+                board[row][col] = '.';
+                cols[col] = diag1[d1] = diag2[d2] = false;
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         char[][] board = {
