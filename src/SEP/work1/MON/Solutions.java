@@ -94,14 +94,40 @@ public class Solutions {
     }
 
 
+    static String[] keypad = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+    public List<String> letterCombinations(String digits) {
+        List<String> ans = new ArrayList<>();
+        if (digits == null || digits.isEmpty()) {
+            return ans;
+        }
+
+        combinationBacktracking(digits, 0, ans, new StringBuilder());
+        return ans;
+    }
+
+    private void combinationBacktracking(String digits, int idx, List<String> ans, StringBuilder sb) {
+
+        //* step: Base case
+
+        if (idx == digits.length()) {
+            ans.add(sb.toString());
+            return;
+        }
+
+        String digit = keypad[digits.charAt(idx) - '0'];
+
+        for (int i = 0; i < digit.length(); i++) {
+            sb.append(digit.charAt(i));
+            combinationBacktracking(digits, idx + 1, ans, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+    }
 
     public static void main(String[] args) {
-        char[][] board = {
-                {'A', 'B', 'C', 'E'},
-                {'S', 'F', 'C', 'S'},
-                {'A', 'D', 'E', 'E'}
-        };
-        String word = "ABCCED";
-        System.out.println(exist(board, word));
+      for (String s : new Solutions().letterCombinations("234")) {
+          System.out.print(s    + " ")  ;
+      }
     }
 }
