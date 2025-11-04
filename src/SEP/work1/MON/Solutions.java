@@ -125,9 +125,37 @@ public class Solutions {
 
     }
 
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        combinationSumHelper(candidates, target, 0, ans, new ArrayList<>(), 0);
+        return ans;
+    }
+
+    private static void combinationSumHelper(int[] candidates, int target, int index, List<List<Integer>> res, List<Integer> curr, int sum) {
+        // * base case 1
+        if (index == candidates.length) return;
+        // * base case 2
+        if (sum == target) {
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        //* base case 3
+        if (sum > target)  return;
+
+        curr.add(candidates[index]);
+        combinationSumHelper(candidates, target, index, res, curr, sum + candidates[index]);
+        curr.removeLast();
+        combinationSumHelper(candidates, target, index+1, res, curr, sum );
+    }
+
     public static void main(String[] args) {
-      for (String s : new Solutions().letterCombinations("234")) {
-          System.out.print(s    + " ")  ;
-      }
+        for (List<Integer> s: combinationSum(new int[] {2,3,6,7,1,2}, 8)) {
+            System.out.print("[ ");
+            for (Integer num : s) {
+                System.out.print(num + " ");
+            }
+            System.out.print(" ]");
+            System.out.println();
+        }
     }
 }
