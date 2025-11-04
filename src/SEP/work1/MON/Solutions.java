@@ -145,17 +145,16 @@ public class Solutions {
         curr.add(candidates[index]);
         combinationSumHelper(candidates, target, index, res, curr, sum + candidates[index]);
         curr.removeLast();
-        combinationSumHelper(candidates, target, index+1, res, curr, sum );
+        combinationSumHelper(candidates, target, index, res, curr, sum );
     }
 
     public static void main(String[] args) {
-        for (List<Integer> s: combinationSum(new int[] {2,3,6,7,1,2}, 8)) {
+        for (List<Integer> s: combinationSum(new int[] {2,3,6,7,1}, 8)) {
             System.out.print("[ ");
             for (Integer num : s) {
                 System.out.print(num + " ");
             }
             System.out.print(" ]");
-            System.out.println();
         }
     }
 }
