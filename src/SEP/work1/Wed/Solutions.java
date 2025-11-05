@@ -66,8 +66,35 @@ public class Solutions {
         return total;
     }
 
+    public static double fractionalKnapsack2(int[] val, int[] wt, int capacity) {
+        Integer [] indexs = new Integer[val.length];
+        //! insert index in indexs array
+        for (int i = 0; i < val.length; i++) {
+            indexs[i] = i;
+        }
+        System.out.println(Arrays.toString(indexs));
+        //! sort index array by ration of items
+        //! use sort method with double compare
+        Arrays.sort(indexs,  (a,b) ->Double.compare((double) val[b] /wt[b], (double) val[a] /wt[a]));
+
+        double total = 0;
+        System.out.println(Arrays.toString(indexs));
+        // TODO:  Iterate over the indexs array, because we are sorting the index values not the actual array. if  i took any index from  index it will  represent other two array wt and val
+        for (int i = 0; i < indexs.length; i++) {
+            if (wt[indexs[i]] <= capacity) {
+                total += val[indexs[i]];
+                capacity -= wt[indexs[i]];
+            }else {
+                double fracPrice = val[indexs[i]] * ((double) capacity / wt[indexs[i]]);
+                total += fracPrice;
+                break;
+            }
+        }
+
+        return Math.round(total * 1e6) /1e6;
+    }
 
     public static void main(String[] args) {
-        System.out.println(fractionalKnapsack(new int[]{60, 100, 120}, new int[]{10, 20, 30}, 50));
+        System.out.println(fractionalKnapsack2(new int[]{120,60,100}, new int[]{30,10,20}, 50));
     }
 }
