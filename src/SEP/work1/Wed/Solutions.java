@@ -94,7 +94,37 @@ public class Solutions {
         return Math.round(total * 1e6) /1e6;
     }
 
+    /*
+    * Minimum number of Coins
+    * */
+    public static int findMin(int n) {
+        int [] coins = new int[]{10,5,2,1};
+        int coinCount = 0;
+        int i = 0;
+        while  (n > 0) {
+            if (n >= coins[i]) {
+                n -= coins[i];
+                coinCount++;
+            }else {
+                i++;
+            }
+        }
+
+        return coinCount;
+    }
+
+    public static int findMin2(int n, int[] coins, int i, int count) {
+        if (n == 0 || i == coins.length) {
+            return count;
+        }
+
+        if (coins[i] <= n) {
+            return findMin2(n - coins[i], coins, i, count + 1);
+        }else {
+            return findMin2(n, coins, i+1, count);
+        }
+    }
     public static void main(String[] args) {
-        System.out.println(fractionalKnapsack2(new int[]{120,60,100}, new int[]{30,10,20}, 50));
+        System.out.println(findMin2(1005, new int [] {10,5,2,1}, 0, 0));
     }
 }
