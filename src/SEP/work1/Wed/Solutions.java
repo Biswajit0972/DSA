@@ -39,34 +39,31 @@ public class Solutions {
         }
     }
 
-        public static double fractionalKnapsack(int[] val, int[] wt, int capacity) {
-      Item [] items = new Item[val.length];
+    public static double fractionalKnapsack(int[] val, int[] wt, int capacity) {
+        Item[] items = new Item[val.length];
 
-      for (int i = 0; i < val.length; i++) {
-          items[i] = new Item(val[i], wt[i]);
-      }
+        for (int i = 0; i < val.length; i++) {
+            items[i] = new Item(val[i], wt[i]);
+        }
 
-      Arrays.sort(items, (a,b) -> Double.compare(b.ratio,  a.ratio));
+        Arrays.sort(items, (a, b) -> Double.compare(b.ratio, a.ratio));
 
-      for (Item item : items) {
-          System.out.println(item.ratio);
-      }
-      double total = 0;
+        double total = 0;
 
-      for (int i =0; i < items.length; i++) {
+        for (int i = 0; i < items.length; i++) {
 
-          if (items[i].wt <= capacity) {
-              total += items[i].val;
-              capacity -= items[i].wt;
-          }else {
+            if (items[i].wt <= capacity) {
+                total += items[i].val;
+                capacity -= items[i].wt;
+            } else {
 
-             double fracPrice = items[i].val * ((double) capacity / items[i].wt);
-             total += fracPrice;
-             break;
-          }
-      }
+                double fracPrice = items[i].val * ((double) capacity / items[i].wt);
+                total += fracPrice;
+                break;
+            }
+        }
 
-      return total;
+        return total;
     }
 
 
