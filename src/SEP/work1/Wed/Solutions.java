@@ -124,7 +124,43 @@ public class Solutions {
             return findMin2(n, coins, i+1, count);
         }
     }
+
+    public static boolean lemonadeChange(int[] bills) {
+        //! create store bucket  // 0 -> 5 1 -> 10 2 ->20
+
+        int [] bucket = new int[3];
+
+        for (int bill : bills) {
+            if (bill == 5) {
+                bucket[0]++;
+            }else if (bill == 10) {
+                if (bucket[0] > 0) {
+                    bucket[0]--;
+                    bucket[1]++;
+                }else {
+                    return false;
+                }
+            }else {
+                if (bucket[1] > 0 && bucket[0] > 0) {
+                    bucket[1]--;
+                    bucket[0]--;
+                }else if (bucket[0] > 0) {
+                    if (bucket [0] >= 3) {
+                        bucket[0] -= 3;
+                    }else {
+                        return false;
+                    }
+                }else {
+                    return false;
+                }
+                bucket[2]++;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
-        System.out.println(findMin2(1005, new int [] {10,5,2,1}, 0, 0));
+        System.out.println(lemonadeChange(new int[]{5,5,10,10,20}));
     }
 }
