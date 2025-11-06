@@ -72,9 +72,6 @@ public class Solutions {
        //! sort the meetings by thier ending time
         Arrays.sort(meetings, (a, b) -> Integer.compare(a.end, b.end));
 
-       for (int i = 0; i < meetings.length; i++) {
-           System.out.println(meetings[i].start + " " + meetings[i].end);
-       }
        int count = 1;
        Meeting curr = meetings[0];
 
@@ -87,8 +84,26 @@ public class Solutions {
 
        return count;
     }
+    public static int maxMeetings2(int start[], int end[]) {
+       Integer [] meetings = new Integer[start.length];
+       for (int i = 0; i < start.length; i++) {
+           meetings[i] = i;
+       }
+
+       //! sort the meetings by thier ending time
+        Arrays.sort(meetings, (a, b) -> Integer.compare(end[a], end[b]));
+       int count = 1;
+       int curr = meetings[0];
+       for (int i = 1; i < meetings.length; i++) {
+           if (end[curr] < start[meetings[i]]) {
+               count++;
+               curr = meetings[i];
+           }
+       }
+       return count;
+    }
 
     public static void main(String[] args) {
-        System.out.println(maxMeetings(new int[]{1, 3, 0, 5, 8, 5}, new int[]{2, 4, 6, 7, 9, 9}));
+        System.out.println(maxMeetings2(new int[]{1, 3, 0, 5, 8, 5}, new int[]{2, 4, 6, 7, 9, 9}));
     }
 }
