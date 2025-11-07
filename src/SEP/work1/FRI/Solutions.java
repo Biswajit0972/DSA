@@ -50,28 +50,22 @@ public class Solutions {
 
         Arrays.sort(indexes, (a, b) -> Integer.compare(dep[a], dep[b]));
         HashMap<Integer, Integer> platform = new HashMap<>();
-        platform.put(0, dep[indexes[0]]);
-        int count = 1;
-        for (int i = 1; i < indexes.length; i++) {
-            boolean assigned = false;
 
-            // check each existing platform
-            for (int j = 0; j < platform.size(); j++) {
-                // if platform j is free before current train arrives
-                if (platform.get(j) < arr[indexes[i]]) {
-                    platform.put(j, dep[indexes[i]]);
-                    assigned = true;
-                    break;
-                }
-            }
+        int i = 0, j = 0;
+        int platNeeded = 0, maxPlat = 0;
 
-            // if no free platform found, add new one
-            if (!assigned) {
-                platform.put(platform.size(), dep[indexes[i]]);
-                count++;
+        while (i < indexes.length && j < indexes.length) {
+            if (arr[indexes[i]] <= dep[indexes[j]]) {
+                platNeeded++;
+                i++;
+            } else {
+                platNeeded--;
+                j++;
             }
+            maxPlat = Math.max(maxPlat, platNeeded);
         }
-        return count;
+
+        return maxPlat;
     }
 
     public static void main(String[] args) {
