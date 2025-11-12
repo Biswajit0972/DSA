@@ -55,10 +55,30 @@ public class Solutions {
         }
     }
 
-    public static void ItPostSingleStack (TreeNode roo)
+    public static void ItPostSingleStack (TreeNode root) {
+        if (root == null) return;
+        Stack<TreeNode> st = new Stack<>();
+        TreeNode lastVisited = null;
+        TreeNode curr = root;
+
+        while (curr != null  || !st.isEmpty()) {
+            if (curr != null) {
+                st.push(curr);
+                curr  =  curr.left;
+            }else {
+                TreeNode peekEle = st.peek();
+                if (peekEle.right != null && lastVisited != peekEle.right){
+                   curr =  peekEle.right;
+                }else {
+                    System.out.print(st.peek().val);
+                    lastVisited = st.pop();
+                }
+            }
+        }
+    }
 
     public static void main(String[] args) {
         TreeNode root = constructTree(new int[] {1,2,3,-1,-1,4,-1,-1,-1}, new Index());
-        ItPreOrder(root);
+         ItPostSingleStack(root);
     }
 }
