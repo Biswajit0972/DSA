@@ -55,6 +55,7 @@ public class Solutions {
         }
     }
 
+    // ! make notes it how it works, how we print
     public static void ItPostSingleStack (TreeNode root) {
         if (root == null) return;
         Stack<TreeNode> st = new Stack<>();
@@ -77,8 +78,17 @@ public class Solutions {
         }
     }
 
+    public static int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+        return Math.max(left, right) + 1;
+    }
+
     public static void main(String[] args) {
         TreeNode root = constructTree(new int[] {1,2,3,-1,-1,4,-1,-1,-1}, new Index());
-         ItPostSingleStack(root);
+         maxDepth(root);
     }
 }
