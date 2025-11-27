@@ -1,5 +1,7 @@
 package SEP.work2.Thu;
 
+import java.util.ArrayList;
+
 public class Solutions {
     static class Index {
         public int index = 0;
